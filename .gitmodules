@@ -1,0 +1,3 @@
+[submodule "Dependencies/libft"]
+	path = Dependencies/libft
+	url = https://github.com/coscialp/libft.git
