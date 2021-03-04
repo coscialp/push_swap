@@ -46,13 +46,13 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
 	@gcc $(FLAG) -g3 -I ${HEADER} -c $< -o $@
 
 libft:
-	@make -C ../Dependencies/libft/
+	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft/
 
 norme:
 	@norminettev2
 
 clean:
-	@make -C ../Dependencies/libft clean
+	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft clean
 	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/	\033[37m"
 	@sleep 0.1
 	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/.	\033[37m"
