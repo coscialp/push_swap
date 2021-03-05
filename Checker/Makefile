@@ -12,11 +12,13 @@ WHITE_BOLD = \033[37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
-HEADER =  ../Dependencies/libft/includes/
+HEADER = ../Includes
+
+HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
 
 DEPENDENCIES = ../Dependencies/libft/libft.a
 
-SRCS_NAME = main.c
+SRCS_NAME = main.c error.c
 
 SRC_PATH = srcs/
 
@@ -34,16 +36,16 @@ NAME = checker
 
 all: libft $(OBJ_PATH) $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
-	@gcc $(FLAG) $(OBJ) -o $(NAME) -I ${HEADER} ${DEPENDENCIES} 
+$(NAME): $(OBJ) $(HEADER) $(HEADER_DEPENDENCIES)
+	@gcc $(FLAG) $(OBJ) -o $(NAME) -I ${HEADER} -I ${HEADER_DEPENDENCIES} ${DEPENDENCIES} 
 	@printf "	\033[2K\r\033[1;38;5;110mChecker\t\t: \033[0;38;5;121mUpdated\n\033[0m"
 
 $(OBJ_PATH):
 	@mkdir -p bin/ 2> /dev/null
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"
-	@gcc $(FLAG) -g3 -I ${HEADER} -c $< -o $@
+	@gcc $(FLAG) -g3 -I ${HEADER} -I ${HEADER_DEPENDENCIES} -c $< -o $@
 
 libft:
 	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft/
