@@ -16,7 +16,7 @@ HEADER = ../Includes
 
 HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
 
-DEPENDENCIES = ../Dependencies/libft/libft.a
+DEPENDENCIES = ../Dependencies/libft/libft.a ../Dependencies/push_swap.a
 
 SRCS_NAME = main.c error.c
 
@@ -48,13 +48,16 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@gcc $(FLAG) -g3 -I ${HEADER} -I ${HEADER_DEPENDENCIES} -c $< -o $@
 
 libft:
-	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft/
+	@test -f ../Dependencies/libft/libft.a || make -C ../Dependencies/libft/
+
+lib:
+	@make -C ../ lib
 
 norme:
 	@norminettev2
 
 clean:
-	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft clean
+	@test -f ../Dependencies/libft/libft.a || make -C ../Dependencies/libft clean
 	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/	\033[37m"
 	@sleep 0.1
 	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/.	\033[37m"

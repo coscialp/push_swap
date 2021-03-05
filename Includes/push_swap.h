@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 09:57:54 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 10:04:35 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ struct s_push_stack
 	void			(*rra)(t_push_stack *);
 	void			(*rrb)(t_push_stack *);
 	void			(*rrr)(t_push_stack *);
+};
+
+typedef struct s_instruction	t_instruc;
+struct s_instruction
+{
+	int		value;
+	void	(*func)(t_push_stack *);
 };
 
 t_push_stack	new_push_stack(void);
