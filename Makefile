@@ -34,7 +34,7 @@ all: lib
 	@make -C Checker
 	@make -C Push_Swap
 
-lib: $(OBJ) $(HEADER)
+lib: $(OBJ_PATH) $(OBJ) $(HEADER)
 	@ar rc ${NAME} ${OBJ}
 	@mv ${NAME} Dependencies/.
 	@printf "	\033[2K\r\033[1;38;5;110mpush_swap.a\t\t: \033[0;38;5;121mUpdated\n\033[0m"
@@ -47,12 +47,12 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
 	@gcc $(FLAG) -g3 -I ${HEADER} -I ${HEADER_DEPENDENCIES} -c $< -o $@
 
 clean:
-	@rm -rf ${OBJ}
+	@rm -rf ${OBJ_PATH}
 	@make -C Checker clean
 	@make -C Push_Swap clean
 
 fclean:
-	@rm -rf ${OBJ} Dependencies/${NAME}
+	@rm -rf ${OBJ_PATH} Dependencies/${NAME}
 	@make -C Checker fclean
 	@make -C Push_Swap fclean
 
