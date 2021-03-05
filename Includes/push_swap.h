@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 10:04:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 13:05:16 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define DUNUM 0x000001
 # define NONUM 0x000002
+# define NOTINS 0x000003
 
 void	log_error(int error);
 
@@ -44,6 +45,8 @@ struct s_instruction
 	int		value;
 	void	(*func)(t_push_stack *);
 };
+
+void	stack_state(t_push_stack s);
 
 t_push_stack	new_push_stack(void);
 void			swap_a(t_push_stack *stack);

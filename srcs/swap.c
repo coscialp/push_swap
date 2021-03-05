@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:41:35 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/05 11:50:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 12:12:04 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	swap_a(t_push_stack *stack)
 {
 	int	tmp;
 
-	if (stack->stack_a && stack->stack_a->_data->_next)
+	if (stack->stack_a->_data && stack->stack_a->_data->_next)
 	{
 		tmp = stack->stack_a->_data->value;
 		stack->stack_a->_data->value = stack->stack_a->_data->_next->value;
-		stack->stack_a->_data->value = tmp;
+		stack->stack_a->_data->_next->value = tmp;
 	}
 }
 
@@ -29,11 +29,11 @@ void	swap_b(t_push_stack *stack)
 {
 	int	tmp;
 
-	if (stack->stack_b && stack->stack_b->_data->_next)
+	if (stack->stack_b->_data && stack->stack_b->_data->_next)
 	{
 		tmp = stack->stack_b->_data->value;
 		stack->stack_b->_data->value = stack->stack_b->_data->_next->value;
-		stack->stack_b->_data->value = tmp;
+		stack->stack_b->_data->_next->value = tmp;
 	}
 }
 

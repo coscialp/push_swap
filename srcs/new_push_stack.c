@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_push_stack.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:44:21 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/05 09:50:59 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 12:05:03 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_push_stack	new_push_stack(void)
 {
 	t_push_stack	push_stack;
 
-	push_stack.stack_a = NULL;
-	push_stack.stack_b = NULL;
+	push_stack.stack_a = new_stack();
+	push_stack.stack_b = new_stack();
 	push_stack.sa = swap_a;
 	push_stack.sb = swap_b;
 	push_stack.ss = swap_s;
