@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/04 15:59:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 08:53:27 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ int	main(int ac, char **av)
 		while (ac-- > 1)
 		{
 			if (ft_stris(av[ac], ft_is_number))
-				stack.push(&stack, ft_atoi(av[ac]));
+			{
+				if (stack.push(&stack, ft_atoi(av[ac])) == -1)
+				{
+					ft_dprintf(2, "Error:\tNo duplicates numbers!\n");
+					return (1);
+				}
+			}
 			else
 			{
 				ft_dprintf(2, "Error:\tOnly numbers are accepted!\n");
