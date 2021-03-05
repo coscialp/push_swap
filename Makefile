@@ -35,7 +35,7 @@ all: lib
 	@make -C Push_Swap
 
 lib: $(OBJ_PATH) $(OBJ) $(HEADER)
-	@ar rc ${NAME} ${OBJ}
+	@ar rcs ${NAME} ${OBJ}
 	@mv ${NAME} Dependencies/.
 	@printf "	\033[2K\r\033[1;38;5;110mpush_swap.a\t: \033[0;38;5;121mUpdated\n\033[0m"
 

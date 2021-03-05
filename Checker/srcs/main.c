@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 14:02:34 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 14:12:42 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ int	main(int ac, char **av)
 	};
 	int		value;
 	short	i;
+	static int	stop = 1;
 
 	if (ac >= 2)
 	{
 		stack = new_push_stack();
-		while (ac-- > 1)
+		if (!ft_strcmp(av[1], "-v"))
+			stop = 2;
+		while (ac-- > stop)
 		{
 			if (ft_stris(av[ac], ft_is_number))
 			{
@@ -88,7 +91,8 @@ int	main(int ac, char **av)
 				if (insn[i].value == value)
 				{
 					insn[i].func(&stack);
-					stack_state(stack);
+					if (stop == 2)
+						stack_state(stack);
 					break ;
 				}
 			}
