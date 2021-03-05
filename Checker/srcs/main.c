@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 09:56:01 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 10:58:03 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,31 @@ int	get_value(char **ptr)
 		value += **ptr;
 		(*ptr)++;
 	}
+	ft_dprintf(2, "%x\n", value);
 	return (value);
 }
 
 int	main(int ac, char **av)
 {
-	static char	*line = NULL;
-	char		*ptr;
-	t_stack		stack;
-	int			possible_insn = { 0x7361, 0x7362, 0x7062, 0x7062, 0x7261, 0x7262, 0x7272, 0x727261, 0x727262, 0x727272 };
-	t_instruc	insn[11] = {
-		{0x7361, }, {0x7362, }, {0x7062, }, {0x7062, }, {0x7261, }, {0x7262, }, {0x7272, }, {0x727261, }, {0x727262, }, {0x727272,}
+	static char			*line = NULL;
+	char				*ptr;
+	t_push_stack		stack;
+	static t_instruc	insn[11] = {
+		{0x7361, swap_a}, {0x7362, swap_b}, {0x7373, swap_s}, \
+		{0x7062, push_a}, {0x7062, push_b}, {0x7261, rotate_a}, \
+		{0x7262, rotate_b}, {0x7272, rotate_r}, {0x727261, r_rotate_a}, \
+		{0x727262, r_rotate_b}, {0x727272, r_rotate_r}
 	};
 
+	(void)insn;
 	if (ac >= 2)
 	{
-		stack = new_stack();
+		stack = new_push_stack();
 		while (ac-- > 1)
 		{
 			if (ft_stris(av[ac], ft_is_number))
 			{
-				if (stack.push(&stack, ft_atoi(av[ac])) == -1)
+				if (stack.stack_a->push(stack.stack_a, ft_atoi(av[ac])) == -1)
 					log_error(DUNUM);
 			}
 			else
