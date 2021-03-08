@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:49:07 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 08:52:06 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	stack_state(t_push_stack s, size_t i)
 void	log_error(int error)
 {
 	if (error == DUNUM)
-		ft_dprintf(2, "Error:\tNo duplicates numbers!\n");
+		ft_dprintf(2, "\033[31;01mError:\tNo duplicates numbers!\033[00m\n");
 	else if (error == NONUM)
-		ft_dprintf(2, "Error:\tOnly numbers are accepted!\n");
+		ft_dprintf(2, "\033[31;01mError:\tOnly numbers are accepted!\033[00m\n");
 	else if (error == NOTINS)
-		ft_dprintf(2, "Error:\tNot instruction!\n");
+		ft_dprintf(2, "\033[31;01mError:\tNot instruction!\033[00m\n");
 	exit(1);
 }

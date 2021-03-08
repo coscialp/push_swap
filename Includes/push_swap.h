@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:36:38 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 09:42:16 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 # define DUNUM 0x000001
 # define NONUM 0x000002
 # define NOTINS 0x000003
+
+typedef enum e_cmd
+{
+	Sa = 0x7361,
+	Sb = 0x7362,
+	Ss = 0x7373,
+	Pa = 0x7061,
+	Pb = 0x7062,
+	Ra = 0x7261,
+	Rb = 0x7262,
+	Rr = 0x7272,
+	Rra = 0x727261,
+	Rrb = 0x727262,
+	Rrr = 0x727272
+}			t_cmd;
 
 typedef struct s_push_stack		t_push_stack;
 struct s_push_stack

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:48:12 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 09:42:21 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_stack(t_push_stack s)
 
 	if (s.stack_b->_size != 0)
 	{
-		ft_dprintf(1, "[KO]\n");
+		ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
 		exit(1);
 	}
 	a = s.stack_a->_data;
@@ -41,12 +41,12 @@ void	check_stack(t_push_stack s)
 	{
 		if (a->value > a->_next->value)
 		{
-			ft_dprintf(1, "[KO]\n");
+			ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
 			exit(1);
 		}
 		a = a->_next;
 	}
-	ft_dprintf(1, "[OK]\n");
+	ft_dprintf(1, "\033[32;01m[OK]\033[00m\n");
 	exit(0);
 }
 
@@ -82,13 +82,13 @@ int	main(int ac, char **av)
 {
 	static char			*ptr = NULL;
 	t_push_stack		stack;
-	static t_instruc	insn[11] = {
-		{0x7361, swap_a}, {0x7362, swap_b}, {0x7373, swap_s}, \
-		{0x7061, push_a}, {0x7062, push_b}, {0x7261, rotate_a}, \
-		{0x7262, rotate_b}, {0x7272, rotate_r}, {0x727261, r_rotate_a}, \
-		{0x727262, r_rotate_b}, {0x727272, r_rotate_r}
-	};
 	static int			stop = 1;
+	static t_instruc	insn[11] = {
+		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, \
+		{Pa, push_a}, {Pb, push_b}, {Ra, rotate_a}, \
+		{Rb, rotate_b}, {Rr, rotate_r}, {Rra, r_rotate_a}, \
+		{Rrb, r_rotate_b}, {Rrr, r_rotate_r}
+	};
 
 	if (ac >= 2)
 	{
