@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 14:12:42 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 08:36:18 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int ac, char **av)
 				{
 					insn[i].func(&stack);
 					if (stop == 2)
-						stack_state(stack);
+						stack_state(stack, st_max(stack.stack_a->_size, stack.stack_b->_size));
 					break ;
 				}
 			}
