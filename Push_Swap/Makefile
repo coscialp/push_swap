@@ -16,7 +16,7 @@ HEADER =  ../Dependencies/libft/includes/
 
 DEPENDENCIES = ../Dependencies/libft/libft.a
 
-SRCS_NAME = main.c
+SRCS_NAME = main.c error.c
 
 SRC_PATH = srcs/
 
