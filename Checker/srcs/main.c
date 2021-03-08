@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:41:24 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 08:48:12 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_stack(t_push_stack s)
 	exit(0);
 }
 
-static void	checker(t_push_stack stack, char *ptr, t_instruc *insn, int stop)
+static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
 {
 	int			value;
 	short		i;
@@ -65,9 +65,9 @@ static void	checker(t_push_stack stack, char *ptr, t_instruc *insn, int stop)
 		{
 			if (insn[i].value == value)
 			{
-				insn[i].func(&stack);
+				insn[i].func(&s);
 				if (stop == 2)
-					stack_state(stack);
+					stack_state(s, st_max(s.stack_a->_size, s.stack_b->_size));
 				break ;
 			}
 		}
@@ -75,13 +75,12 @@ static void	checker(t_push_stack stack, char *ptr, t_instruc *insn, int stop)
 			log_error(NOTINS);
 		ft_strdel(&line);
 	}
-	check_stack(stack);
+	check_stack(s);
 }
 
 int	main(int ac, char **av)
 {
-	//sstatic char			*line = NULL;
-	char				*ptr;
+	static char			*ptr = NULL;
 	t_push_stack		stack;
 	static t_instruc	insn[11] = {
 		{0x7361, swap_a}, {0x7362, swap_b}, {0x7373, swap_s}, \
@@ -91,7 +90,6 @@ int	main(int ac, char **av)
 	};
 	static int			stop = 1;
 
-	ptr = NULL;
 	if (ac >= 2)
 	{
 		stack = new_push_stack();

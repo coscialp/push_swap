@@ -6,38 +6,44 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/05 13:23:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 08:40:32 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#define MIN(a, b) ((a < b) ? a : b)
-#define MAX(a, b) ((a > b) ? a : b)
-
-void	stack_state(t_push_stack s)
+size_t	st_min(size_t a, size_t b)
 {
-	size_t	i;
-	t_node_stack *a;
-	t_node_stack *b;
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+size_t	st_max(size_t a, size_t b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+void	stack_state(t_push_stack s, size_t i)
+{
+	t_node_stack	*a;
+	t_node_stack	*b;
 
 	a = s.stack_a->_data;
 	b = s.stack_b->_data;
-	i = MAX(s.stack_a->_size, s.stack_b->_size);
-
-	while (i > MIN(s.stack_a->_size, s.stack_b->_size))
+	while (i > st_min(s.stack_a->_size, s.stack_b->_size))
 	{
-		if (s.stack_a->_size > s.stack_b->_size)
-		{
-			ft_dprintf(2, "%10d | \n", a->value);
+		if (s.stack_a->_size > s.stack_b->_size && \
+		ft_dprintf(2, "%10d | \n", a->value))
 			a = a->_next;
-		}
 		else
 		{
 			ft_dprintf(2, "           | %-10d\n", b->value);
 			b = b->_next;
 		}
-		--i;
+		i--;
 	}
 	while (i > 0)
 	{
