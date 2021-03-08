@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:52:06 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 10:23:59 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ inline size_t	st_max(size_t a, size_t b)
 	return (b);
 }
 
-void	stack_state(t_push_stack s, size_t i)
+void	stack_state(t_push_stack s, size_t max, size_t i)
 {
 	t_node_stack	*a;
 	t_node_stack	*b;
 
 	a = s.stack_a->_data;
 	b = s.stack_b->_data;
-	while (i > st_min(s.stack_a->_size, s.stack_b->_size))
+	while (max > st_min(s.stack_a->_size, s.stack_b->_size))
 	{
 		if (s.stack_a->_size > s.stack_b->_size && \
 		ft_dprintf(2, "%10d | \n", a->value))
@@ -43,16 +43,17 @@ void	stack_state(t_push_stack s, size_t i)
 			ft_dprintf(2, "           | %-10d\n", b->value);
 			b = b->_next;
 		}
-		i--;
+		max--;
 	}
-	while (i > 0)
+	while (max > 0)
 	{
 		ft_dprintf(2, "%10d | %-10d\n", a->value, b->value);
 		a = a->_next;
 		b = b->_next;
-		--i;
+		--max;
 	}
 	ft_dprintf(2, "------------------------\n         a | b      \n");
+	ft_dprintf(2, "    nb instruction = %d\n", i);
 }
 
 void	log_error(int error)

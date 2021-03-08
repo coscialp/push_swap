@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 09:42:21 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 10:21:59 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ void	check_stack(t_push_stack s)
 static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
 {
 	int			value;
+	size_t		nb;
 	short		i;
 	static char	*line = NULL;
 
+	nb = 0;
 	while (get_next_line(0, &line) > 0)
 	{
 		ptr = line;
@@ -66,8 +68,9 @@ static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
 			if (insn[i].value == value)
 			{
 				insn[i].func(&s);
+				nb++;
 				if (stop == 2)
-					stack_state(s, st_max(s.stack_a->_size, s.stack_b->_size));
+					stack_state(s, st_max(s.stack_a->_size, s.stack_b->_size), nb);
 				break ;
 			}
 		}
