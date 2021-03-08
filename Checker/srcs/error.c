@@ -6,20 +6,20 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 08:40:32 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 08:49:07 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	st_min(size_t a, size_t b)
+inline size_t	st_min(size_t a, size_t b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-size_t	st_max(size_t a, size_t b)
+inline size_t	st_max(size_t a, size_t b)
 {
 	if (a > b)
 		return (a);
