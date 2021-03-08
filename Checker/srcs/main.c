@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 10:21:59 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 13:10:03 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,25 @@ static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
 	check_stack(s);
 }
 
+static char	*ft_strsep(char **stringp, const char *delim)
+{
+	char	*begin;
+	char	*end;
+
+	begin = *stringp;
+	if (begin == NULL)
+		return (NULL);
+	end = begin + ft_strcspn(begin, delim);
+	if (*end)
+	{
+		*end++ = '\0';
+		*stringp = end;
+	}
+	else
+		*stringp = NULL;
+	return (begin);
+}
+
 int	main(int ac, char **av)
 {
 	static char			*ptr = NULL;
@@ -92,6 +111,7 @@ int	main(int ac, char **av)
 		{Rb, rotate_b}, {Rr, rotate_r}, {Rra, r_rotate_a}, \
 		{Rrb, r_rotate_b}, {Rrr, r_rotate_r}
 	};
+	static char	*tok = NULL;
 
 	if (ac >= 2)
 	{
@@ -100,13 +120,20 @@ int	main(int ac, char **av)
 			stop = 2;
 		while (ac-- > stop)
 		{
-			if (ft_stris(av[ac], ft_is_number))
+			tok = ft_strsep(&av[ac], " ");
+			while (tok)
 			{
-				if (stack.stack_a->push(stack.stack_a, ft_atoi(av[ac])) == -1)
-					log_error(DUNUM);
+				if (ft_stris(tok, ft_is_number))
+				{
+					if (stack.stack_b->push(stack.stack_b, ft_atoi(tok)) == -1)
+						log_error(DUNUM);
+				}
+				else
+					log_error(NONUM);
+				tok = ft_strsep(&av[ac], " ");
 			}
-			else
-				log_error(NONUM);
+			while (stack.stack_b->_size)
+				insn[3].func(&stack);
 		}
 		checker(stack, ptr, insn, stop);
 	}
