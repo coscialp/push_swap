@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 08:54:46 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 09:37:38 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,9 @@ void	check_stack(t_push_stack s)
 	exit(0);
 }
 
-static void	push_swap(t_push_stack s, char *ptr, t_instruc *insn, int stop)
+static void	push_swap(t_push_stack s, t_instruc *insn)
 {
-	//int			value;
-	//size_t		nb;
-	//short		i;
-	//static char	*line = NULL;
-
-	(void)ptr;
-	(void)insn;
-	(void)stop;
-
-	//nb = 0;
-	//while (get_next_line(0, &line) > 0)
-	//{
-	//	ptr = line;
-	//	value = get_value(&ptr);
-	//	i = -1;
-	//	while (++i < 11)
-	//	{
-	//		if (insn[i].value == value)
-	//		{
-	//			insn[i].func(&s);
-	//			nb++;
-	//			if (stop == 2)
-	//				stack_state(s, st_max(s.stack_a->_size, s.stack_b->_size), nb);
-	//			break ;
-	//		}
-	//	}
-	//	if (i == 11)
-	//		log_error(NOTINS);
-	//	ft_strdel(&line);
-	//}
+	dprintf(2, "smallest : %d\n", first_algo(s, insn));
 	check_stack(s);
 }
 
@@ -106,7 +77,6 @@ static char	*ft_strsep(char **stringp, const char *delim)
 
 int	main(int ac, char **av)
 {
-	static char			*ptr = NULL;
 	t_push_stack		stack;
 	static int			stop = 1;
 	static t_instruc	insn[11] = {
@@ -139,7 +109,7 @@ int	main(int ac, char **av)
 			while (stack.stack_b->_size)
 				insn[3].func(&stack);
 		}
-		push_swap(stack, ptr, insn, stop);
+		push_swap(stack, insn);
 	}
 	return (0);
 }

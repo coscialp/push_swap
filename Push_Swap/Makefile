@@ -18,7 +18,7 @@ HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
 
 DEPENDENCIES = ../Dependencies/libft/libft.a ../Dependencies/push_swap.a
 
-SRCS_NAME = main.c error.c
+SRCS_NAME = main.c error.c algorithms/first_algo.c
 
 SRC_PATH = srcs/
 
@@ -42,6 +42,7 @@ $(NAME): $(OBJ) $(HEADER)
 
 $(OBJ_PATH):
 	@mkdir -p bin/ 2> /dev/null
+	@mkdir -p bin/algorithms 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"

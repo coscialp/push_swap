@@ -12,7 +12,7 @@ WHITE_BOLD = \033[37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
-SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c
+SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c
 
 HEADER		=	Includes/
 
