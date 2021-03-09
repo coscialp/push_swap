@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:48:59 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 11:21:48 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/push_swap.h"
 
-bool	check_stack(t_push_stack s)
+bool	check_stack_p(t_push_stack s)
 {
 	t_node_stack	*a;
 

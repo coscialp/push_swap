@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:49:27 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 11:22:15 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**clone(char **str)
 
 static void	push_swap(t_push_stack s, t_instruc *insn)
 {
-	while (check_stack(s))
+	while (check_stack_p(s))
 		first_algo(s, insn);
 }
 
