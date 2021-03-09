@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/08 14:06:52 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 09:40:55 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,50 +27,33 @@ int	get_value(char **ptr)
 	return (value);
 }
 
-void	check_stack(t_push_stack s)
+char	**clone(char **str)
 {
-	t_node_stack	*a;
+	static char	*ptr;
 
-	if (s.stack_b->_size != 0)
-	{
-		ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
-		exit(1);
-	}
-	a = s.stack_a->_data;
-	while (a->_next)
-	{
-		if (a->value > a->_next->value)
-		{
-			ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
-			exit(1);
-		}
-		a = a->_next;
-	}
-	ft_dprintf(1, "\033[32;01m[OK]\033[00m\n");
-	exit(0);
+	ptr = *str;
+	return (&ptr);
 }
 
-static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
+static void	checker(t_push_stack s, t_instruc *insn, int stop)
 {
-	int			value;
-	size_t		nb;
-	short		i;
-	static char	*line = NULL;
+	int				value;
+	static size_t	nb = 0;
+	short			i;
+	static char		*line = NULL;
 
-	nb = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		ptr = line;
-		value = get_value(&ptr);
+		value = get_value(clone(&line));
 		i = -1;
 		while (++i < 11)
 		{
-			if (insn[i].value == value)
+			if (insn[i].value == value && nb++ >= 0)
 			{
 				insn[i].func(&s);
-				nb++;
 				if (stop == 2)
-					stack_state(s, st_max(s.stack_a->_size, s.stack_b->_size), nb);
+					stack_state(s, \
+					st_max(s.stack_a->_size, s.stack_b->_size), nb);
 				break ;
 			}
 		}
@@ -81,37 +64,31 @@ static void	checker(t_push_stack s, char *ptr, t_instruc *insn, int stop)
 	check_stack(s);
 }
 
-static char	*ft_strsep(char **stringp, const char *delim)
+bool	no_duplicate_number(t_stack *a, int value)
 {
-	char	*begin;
-	char	*end;
+	t_node_stack	*tmp;
 
-	begin = *stringp;
-	if (begin == NULL)
-		return (NULL);
-	end = begin + ft_strcspn(begin, delim);
-	if (*end)
+	tmp = a->_data;
+	while (tmp)
 	{
-		*end++ = '\0';
-		*stringp = end;
+		if (tmp->value == value)
+			return (1);
+		tmp = tmp->_next;
 	}
-	else
-		*stringp = NULL;
-	return (begin);
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	static char			*ptr = NULL;
 	t_push_stack		stack;
 	static int			stop = 1;
+	static char			*tok = NULL;
 	static t_instruc	insn[11] = {
 		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, \
 		{Pa, push_a}, {Pb, push_b}, {Ra, rotate_a}, \
 		{Rb, rotate_b}, {Rr, rotate_r}, {Rra, r_rotate_a}, \
 		{Rrb, r_rotate_b}, {Rrr, r_rotate_r}
 	};
-	static char	*tok = NULL;
 
 	if (ac >= 2)
 	{
@@ -125,7 +102,8 @@ int	main(int ac, char **av)
 			{
 				if (ft_stris(tok, ft_is_number))
 				{
-					if (stack.stack_b->push(stack.stack_b, ft_atoi(tok)) == -1)
+					if (stack.stack_b->push(stack.stack_b, ft_atoi(tok)) == -1 || \
+					no_duplicate_number(stack.stack_a, ft_atoi(tok)))
 						log_error(DUNUM);
 				}
 				else
@@ -135,7 +113,7 @@ int	main(int ac, char **av)
 			while (stack.stack_b->_size)
 				insn[3].func(&stack);
 		}
-		checker(stack, ptr, insn, stop);
+		checker(stack, insn, stop);
 	}
 	return (0);
 }
