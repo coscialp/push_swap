@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:18:35 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:28:55 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,12 @@ int	get_value(char **ptr)
 	return (value);
 }
 
-void	check_stack(t_push_stack s)
+char	**clone(char **str)
 {
-	t_node_stack	*a;
+	static char	*ptr;
 
-	if (s.stack_b->_size != 0)
-	{
-		ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
-		exit(1);
-	}
-	a = s.stack_a->_data;
-	while (a->_next)
-	{
-		if (a->value > a->_next->value)
-		{
-			ft_dprintf(1, "\033[31;01m[KO]\033[00m\n");
-			exit(1);
-		}
-		a = a->_next;
-	}
-	ft_dprintf(1, "\033[32;01m[OK]\033[00m\n");
-	exit(0);
+	ptr = *str;
+	return (&ptr);
 }
 
 static void	push_swap(t_push_stack s, t_instruc *insn)
@@ -56,17 +41,37 @@ static void	push_swap(t_push_stack s, t_instruc *insn)
 	check_stack(s);
 }
 
+void	parser(t_push_stack *s, t_instruc *insn, char **arg)
+{
+	char	*tok;
+
+	tok = NULL;
+	tok = ft_strsep(arg, " ");
+	while (tok)
+	{
+		if (ft_stris(tok, ft_is_number))
+		{
+			if (s->stack_b->push(s->stack_b, ft_atoi(tok)) == -1 || \
+			no_duplicate_number(s->stack_a, ft_atoi(tok)))
+				log_error(DUNUM);
+		}
+		else
+			log_error(NONUM);
+		tok = ft_strsep(arg, " ");
+	}
+	while (s->stack_b->_size)
+		insn[3].func(s);
+}
+
 int	main(int ac, char **av)
 {
 	t_push_stack		stack;
 	static int			stop = 1;
 	static t_instruc	insn[11] = {
-		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, \
-		{Pa, push_a}, {Pb, push_b}, {Ra, rotate_a}, \
-		{Rb, rotate_b}, {Rr, rotate_r}, {Rra, r_rotate_a}, \
-		{Rrb, r_rotate_b}, {Rrr, r_rotate_r}
+		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, {Pa, push_a}, \
+		{Pb, push_b}, {Ra, rotate_a}, {Rb, rotate_b}, {Rr, rotate_r}, \
+		{Rra, r_rotate_a}, {Rrb, r_rotate_b}, {Rrr, r_rotate_r}
 	};
-	static char	*tok = NULL;
 
 	if (ac >= 2)
 	{
@@ -74,23 +79,8 @@ int	main(int ac, char **av)
 		if (!ft_strcmp(av[1], "-v"))
 			stop = 2;
 		while (ac-- > stop)
-		{
-			tok = ft_strsep(&av[ac], " ");
-			while (tok)
-			{
-				if (ft_stris(tok, ft_is_number))
-				{
-					if (stack.stack_b->push(stack.stack_b, ft_atoi(tok)) == -1)
-						log_error(DUNUM);
-				}
-				else
-					log_error(NONUM);
-				tok = ft_strsep(&av[ac], " ");
-			}
-			while (stack.stack_b->_size)
-				insn[3].func(&stack);
-		}
-		push_swap(stack, insn);
+			parser(&stack, insn, &av[ac]);
+		checker(stack, insn, stop);
 	}
 	return (0);
 }

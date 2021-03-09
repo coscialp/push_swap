@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 09:40:55 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:18:35 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,36 @@ static void	checker(t_push_stack s, t_instruc *insn, int stop)
 	check_stack(s);
 }
 
-bool	no_duplicate_number(t_stack *a, int value)
+void	parser(t_push_stack *s, t_instruc *insn, char **arg)
 {
-	t_node_stack	*tmp;
+	char	*tok;
 
-	tmp = a->_data;
-	while (tmp)
+	tok = NULL;
+	tok = ft_strsep(arg, " ");
+	while (tok)
 	{
-		if (tmp->value == value)
-			return (1);
-		tmp = tmp->_next;
+		if (ft_stris(tok, ft_is_number))
+		{
+			if (s->stack_b->push(s->stack_b, ft_atoi(tok)) == -1 || \
+			no_duplicate_number(s->stack_a, ft_atoi(tok)))
+				log_error(DUNUM);
+		}
+		else
+			log_error(NONUM);
+		tok = ft_strsep(arg, " ");
 	}
-	return (0);
+	while (s->stack_b->_size)
+		insn[3].func(s);
 }
 
 int	main(int ac, char **av)
 {
 	t_push_stack		stack;
 	static int			stop = 1;
-	static char			*tok = NULL;
 	static t_instruc	insn[11] = {
-		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, \
-		{Pa, push_a}, {Pb, push_b}, {Ra, rotate_a}, \
-		{Rb, rotate_b}, {Rr, rotate_r}, {Rra, r_rotate_a}, \
-		{Rrb, r_rotate_b}, {Rrr, r_rotate_r}
+		{Sa, swap_a}, {Sb, swap_b}, {Ss, swap_s}, {Pa, push_a}, \
+		{Pb, push_b}, {Ra, rotate_a}, {Rb, rotate_b}, {Rr, rotate_r}, \
+		{Rra, r_rotate_a}, {Rrb, r_rotate_b}, {Rrr, r_rotate_r}
 	};
 
 	if (ac >= 2)
@@ -96,23 +102,7 @@ int	main(int ac, char **av)
 		if (!ft_strcmp(av[1], "-v"))
 			stop = 2;
 		while (ac-- > stop)
-		{
-			tok = ft_strsep(&av[ac], " ");
-			while (tok)
-			{
-				if (ft_stris(tok, ft_is_number))
-				{
-					if (stack.stack_b->push(stack.stack_b, ft_atoi(tok)) == -1 || \
-					no_duplicate_number(stack.stack_a, ft_atoi(tok)))
-						log_error(DUNUM);
-				}
-				else
-					log_error(NONUM);
-				tok = ft_strsep(&av[ac], " ");
-			}
-			while (stack.stack_b->_size)
-				insn[3].func(&stack);
-		}
+			parser(&stack, insn, &av[ac]);
 		checker(stack, insn, stop);
 	}
 	return (0);
