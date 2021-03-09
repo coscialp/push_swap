@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 09:28:05 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:18:50 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void			stack_state(t_push_stack s, size_t max, size_t i);
 size_t			st_max(size_t a, size_t b);
 size_t			st_min(size_t a, size_t b);
 void			check_stack(t_push_stack s);
+bool			no_duplicate_number(t_stack *a, int value);
 
 t_push_stack	new_push_stack(void);
 void			swap_a(t_push_stack *stack);

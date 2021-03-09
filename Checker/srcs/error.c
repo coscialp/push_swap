@@ -6,25 +6,11 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 09:27:52 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:23:20 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/push_swap.h"
-
-inline size_t	st_min(size_t a, size_t b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-inline size_t	st_max(size_t a, size_t b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
 
 void	check_stack(t_push_stack s)
 {
@@ -77,6 +63,20 @@ void	stack_state(t_push_stack s, size_t max, size_t i)
 	}
 	ft_dprintf(2, "------------------------\n         a | b      \n");
 	ft_dprintf(2, "    nb instruction = %d\n", i);
+}
+
+bool	no_duplicate_number(t_stack *a, int value)
+{
+	t_node_stack	*tmp;
+
+	tmp = a->_data;
+	while (tmp)
+	{
+		if (tmp->value == value)
+			return (1);
+		tmp = tmp->_next;
+	}
+	return (0);
 }
 
 void	log_error(int error)
