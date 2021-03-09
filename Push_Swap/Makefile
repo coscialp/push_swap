@@ -14,7 +14,9 @@ ORANGE = \033[3;91m
 
 HEADER =  ../Dependencies/libft/includes/
 
-DEPENDENCIES = ../Dependencies/libft/libft.a
+HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
+
+DEPENDENCIES = ../Dependencies/libft/libft.a ../Dependencies/push_swap.a
 
 SRCS_NAME = main.c error.c
 
@@ -41,18 +43,18 @@ $(NAME): $(OBJ) $(HEADER)
 $(OBJ_PATH):
 	@mkdir -p bin/ 2> /dev/null
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"
-	@gcc $(FLAG) -g3 -I ${HEADER} -c $< -o $@
+	@gcc $(FLAG) -g3 -I ${HEADER} -I ${HEADER_DEPENDENCIES} -c $< -o $@
 
 libft:
-	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft/
+	@test -f ./Dependencies/libft/libft.a || make -C ../Dependencies/libft/
 
 norme:
 	@norminettev2
 
 clean:
-	@test -f ${DEPENDENCIES} || make -C ../Dependencies/libft clean
+	@test -f ./Dependencies/libft/libft.a || make -C ../Dependencies/libft clean
 	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/	\033[37m"
 	@sleep 0.1
 	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/.	\033[37m"
