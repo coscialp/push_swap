@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:18:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 11:29:32 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ static void	checker(t_push_stack s, t_instruc *insn, int stop)
 			{
 				insn[i].func(&s);
 				if (stop == 2)
+				{
+					ft_dprintf(2, "\n    instruction: %s\n", line);
 					stack_state(s, \
 					st_max(s.stack_a->_size, s.stack_b->_size), nb);
+				}
 				break ;
 			}
 		}

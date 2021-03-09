@@ -18,7 +18,7 @@ HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
 
 DEPENDENCIES = ../Dependencies/libft/libft.a ../Dependencies/push_swap.a
 
-SRCS_NAME = main.c error.c algorithms/first_algo.c
+SRCS_NAME = main.c error.c algorithms/first_algo.c algorithms/second_algo.c
 
 SRC_PATH = srcs/
 

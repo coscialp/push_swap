@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/09 11:01:49 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 12:59:07 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static bool	check_stack_a(t_push_stack s)
 
 int	first_algo(t_push_stack stack, t_instruc *insn)
 {
-	(void)insn;
 	int		smallest;
 	int		smallest_index;
 

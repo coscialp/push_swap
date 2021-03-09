@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 11:22:23 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 12:59:30 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int				find_smallest_element(t_push_stack stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
 
 int				first_algo(t_push_stack s, t_instruc *insn);
+int				second_algo(t_push_stack stack, t_instruc *insn);
 
 #endif
