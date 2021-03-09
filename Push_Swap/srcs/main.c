@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:30:33 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:49:27 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	**clone(char **str)
 
 static void	push_swap(t_push_stack s, t_instruc *insn)
 {
-	first_algo(s, insn);
-	check_stack(s);
+	while (check_stack(s))
+		first_algo(s, insn);
 }
 
 void	parser(t_push_stack *s, t_instruc *insn, char **arg)

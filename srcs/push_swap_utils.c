@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/09 10:23:07 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:38:11 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_smallest_element(t_push_stack stack)
 {
-	int	smallest;
+	int				smallest;
 	t_node_stack	*tmp;
 
 	smallest = INT_MAX;
