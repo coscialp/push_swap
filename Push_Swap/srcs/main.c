@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:28:55 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:30:33 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int ac, char **av)
 			stop = 2;
 		while (ac-- > stop)
 			parser(&stack, insn, &av[ac]);
-		checker(stack, insn, stop);
+		push_swap(stack, insn);
 	}
 	return (0);
 }
