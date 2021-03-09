@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 09:37:38 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:18:35 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,8 @@ void	check_stack(t_push_stack s)
 
 static void	push_swap(t_push_stack s, t_instruc *insn)
 {
-	dprintf(2, "smallest : %d\n", first_algo(s, insn));
+	first_algo(s, insn);
 	check_stack(s);
-}
-
-static char	*ft_strsep(char **stringp, const char *delim)
-{
-	char	*begin;
-	char	*end;
-
-	begin = *stringp;
-	if (begin == NULL)
-		return (NULL);
-	end = begin + ft_strcspn(begin, delim);
-	if (*end)
-	{
-		*end++ = '\0';
-		*stringp = end;
-	}
-	else
-		*stringp = NULL;
-	return (begin);
 }
 
 int	main(int ac, char **av)
