@@ -12,13 +12,13 @@ WHITE_BOLD = \033[37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
-HEADER = ../Includes
+HEADER =  ../../Includes
 
-HEADER_DEPENDENCIES =  ../Dependencies/libft/includes/
+HEADER_DEPENDENCIES =  ../../Dependencies/libft/includes/
 
-DEPENDENCIES = ../Dependencies/libft/libft.a ../Dependencies/push_swap.a
+DEPENDENCIES = ../../Dependencies/libft/libft.a ../../Dependencies/push_swap.a
 
-SRCS_NAME = main.c error.c
+SRCS_NAME = main.c algorithms/first_algo.c algorithms/merge_sort.c algorithms/quick_sort.c
 
 SRC_PATH = srcs/
 
@@ -32,47 +32,45 @@ OBJ_PATH = bin/
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-NAME = checker
+NAME = push_swap
 
 all: libft $(OBJ_PATH) $(NAME)
 
 $(NAME): $(OBJ) $(HEADER) $(HEADER_DEPENDENCIES)
 	@gcc $(FLAG) $(OBJ) -o $(NAME) -I ${HEADER} -I ${HEADER_DEPENDENCIES} ${DEPENDENCIES} 
-	@printf "	\033[2K\r\033[1;38;5;110mChecker\t\t: \033[0;38;5;121mUpdated\n\033[0m"
+	@printf "	\033[2K\r\033[1;38;5;110mPushSwap\t: \033[0;38;5;121mUpdated\n\033[0m"
 
 $(OBJ_PATH):
 	@mkdir -p bin/ 2> /dev/null
+	@mkdir -p bin/algorithms 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"
 	@gcc $(FLAG) -g3 -I ${HEADER} -I ${HEADER_DEPENDENCIES} -c $< -o $@
 
 libft:
-	@test -f ../Dependencies/libft/libft.a || make -C ../Dependencies/libft/
-
-lib:
-	@make -C ../ lib
+	@test -f ../../Dependencies/libft/libft.a || make -C ../../Dependencies/libft/
 
 norme:
 	@norminettev2
 
 clean:
-	@test -f ../Dependencies/libft/libft.a || make -C ../Dependencies/libft clean
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/	\033[37m"
+	@test -f ../../Dependencies/libft/libft.a || make -C ../../Dependencies/libft clean
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/.	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/.	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/..	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/..	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/...	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/...	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/.	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/.	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/..	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/..	\033[37m"
 	@sleep 0.1
-	@printf "\33[2K\r$(ORANGE)Deleting checker srcs/...	\033[37m"
+	@printf "\33[2K\r$(ORANGE)Deleting PushSwap srcs/...	\033[37m"
 	@sleep 0.1
 	@rm -rf ${OBJ_PATH}
 	@printf "\33[2K\r$(ORANGE)Deleted successfully!\n\033[0m"

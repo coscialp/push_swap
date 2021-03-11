@@ -12,19 +12,20 @@ WHITE_BOLD = \033[37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
-SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c vector_result.c
+SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c vector_result.c error.c get_value.c parser.c \
+				check_order.c find_median.c
 
 HEADER		=	Includes/
 
 HEADER_DEPENDENCIES =  Dependencies/libft/includes/
 
-SRC_PATH	=	srcs/
+SRC_PATH	=	Srcs/
 
 SRCS		=	$(addprefix $(SRC_PATH), $(SRCS_NAME))
 
 OBJ_NAME = ${SRCS_NAME:.c=.o}
 
-OBJ_PATH = bin/
+OBJ_PATH = Bin/
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
@@ -32,17 +33,17 @@ NAME = push_swap.a
 
 FLAG = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address
 
-all: $(OBJ_PATH) $(NAME)
-	@make -C Checker
-	@make -C Push_Swap
+all: $(OBJ_PATH) Dependencies/$(NAME)
+	@make -C Srcs/Checker
+	@make -C Srcs/Push_Swap
 
-$(NAME): $(OBJ) $(HEADER)
+Dependencies/$(NAME): $(OBJ) $(HEADER)
 	@ar rcs ${NAME} ${OBJ}
 	@mv ${NAME} Dependencies/.
 	@printf "	\033[2K\r\033[1;38;5;110mpush_swap.a\t: \033[0;38;5;121mUpdated\n\033[0m"
 
 $(OBJ_PATH):
-	@mkdir -p bin/ 2> /dev/null
+	@mkdir -p Bin/ 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"
@@ -50,12 +51,12 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) Makefile
 
 clean:
 	@rm -rf ${OBJ_PATH}
-	@make -C Checker clean
-	@make -C Push_Swap clean
+	@make -C Srcs/Checker clean
+	@make -C Srcs/Push_Swap clean
 
 fclean:
 	@rm -rf ${OBJ_PATH} Dependencies/${NAME}
-	@make -C Checker fclean
-	@make -C Push_Swap fclean
+	@make -C Srcs/Checker fclean
+	@make -C Srcs/Push_Swap fclean
 
 re: fclean all

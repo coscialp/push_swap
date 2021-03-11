@@ -6,34 +6,12 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 10:58:13 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:21:29 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../../Includes/push_swap.h"
-
-int	get_value(char **ptr)
-{
-	int	value;
-
-	value = 0;
-	while (**ptr != '\0')
-	{
-		value <<= 8;
-		value += **ptr;
-		(*ptr)++;
-	}
-	return (value);
-}
-
-char	**clone(char **str)
-{
-	static char	*ptr;
-
-	ptr = *str;
-	return (&ptr);
-}
+#include "push_swap.h"
 
 static void	push_swap(t_push_stack s, t_instruc *insn)
 {
@@ -56,7 +34,7 @@ static void	push_swap(t_push_stack s, t_instruc *insn)
 	min_insn = INT_MAX;
 	while (i < 1)
 	{
-		while (check_stack_p(s))
+		while (check_stack(s, PUSH_SWAP))
 		{
 			if (i == 0)
 				tmp_nb = merge_sort(s, insn, i);
@@ -121,28 +99,6 @@ static void	push_swap(t_push_stack s, t_instruc *insn)
 	i = -1;
 	while (++i < s.algo[best_algo]->size)
 		ft_dprintf(STDOUT, "%s\n", s.algo[best_algo]->ins[i]);
-}
-
-void	parser(t_push_stack *s, t_instruc *insn, char **arg)
-{
-	char	*tok;
-
-	tok = NULL;
-	tok = ft_strsep(arg, " ");
-	while (tok)
-	{
-		if (ft_stris(tok, ft_is_number))
-		{
-			if (s->stack_b->push(s->stack_b, ft_atoi(tok)) == -1 || \
-			no_duplicate_number(s->stack_a, ft_atoi(tok)))
-				log_error(DUNUM);
-		}
-		else
-			log_error(NONUM);
-		tok = ft_strsep(arg, " ");
-	}
-	while (s->stack_b->_size)
-		insn[3].func(s);
 }
 
 int	main(int ac, char **av)

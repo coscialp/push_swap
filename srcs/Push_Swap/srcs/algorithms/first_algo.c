@@ -6,26 +6,12 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/11 10:32:57 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:21:36 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "../../../Includes/push_swap.h"
-
-static bool	check_stack_a(t_push_stack s)
-{
-	t_node_stack	*a;
-
-	a = s.stack_a->_data;
-	while (a->_next)
-	{
-		if (a->value > a->_next->value)
-			return (1);
-		a = a->_next;
-	}
-	return (0);
-}
 
 int	first_algo(t_push_stack stack, t_instruc *insn, int id)
 {
@@ -35,7 +21,7 @@ int	first_algo(t_push_stack stack, t_instruc *insn, int id)
 	static int begin = 0;
 
 	nb_insn++;
-	if (check_stack_a(stack) == 0)
+	if (check_order_stack(stack, STACK_A) == 0)
 	{
 		insn[PA].func(&stack);
 		stack.algo[id]->pushback(stack.algo[id], "pa");
