@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/11 11:20:49 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:33:33 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_log(size_t value)
 	return (ret);
 }
 
-int	find_smallest_element_a(t_push_stack stack)
+static int	find_smallest_element_a(t_push_stack stack)
 {
 	int				smallest;
 	t_node_stack	*tmp;
@@ -43,7 +43,7 @@ int	find_smallest_element_a(t_push_stack stack)
 	return (smallest);
 }
 
-int	find_smallest_element_b(t_push_stack stack)
+static int	find_smallest_element_b(t_push_stack stack)
 {
 	int				smallest;
 	t_node_stack	*tmp;
@@ -57,6 +57,15 @@ int	find_smallest_element_b(t_push_stack stack)
 		tmp = tmp->_next;
 	}
 	return (smallest);
+}
+
+int	find_smallest_element(t_push_stack stack, int id_stack)
+{
+	if (id_stack == STACK_A)
+		return (find_smallest_element_a(stack));
+	else if (id_stack == STACK_B)
+		return (find_smallest_element_b(stack));
+	return (0);
 }
 
 int	find_smallest_element_index(t_push_stack stack, int smallest)
