@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 13:21:44 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 08:48:05 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef struct s_result
 	size_t		capacity;
 
 	void		(*pushback)(struct s_result *, char *);
+	void		(*pushfront)(struct s_result *, char *);
 	void		(*popback)(struct s_result *);
+	void		(*remove)(struct s_result *, int);
 }				t_result;
 
 typedef struct s_push_stack		t_push_stack;
@@ -68,7 +70,7 @@ struct s_push_stack
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_result		*algo[1];
+	t_result		*algo[2];
 
 	void			(*sa)(t_push_stack *);
 	void			(*sb)(t_push_stack *);
@@ -89,6 +91,14 @@ struct s_instruction
 	int		value;
 	void	(*func)(t_push_stack *);
 };
+
+typedef struct s_pattern
+{
+	int			size;
+	int			new_size;
+	char		*current[4];
+	char		*newpattern[4];
+}				t_pattern;
 
 void			log_error(int error);
 void			stack_state(t_push_stack s, size_t max, size_t i);
@@ -116,13 +126,16 @@ int				find_smallest_element_index(t_push_stack stack, int smallest);
 
 int				second_algo(t_push_stack stack, t_instruc *insn);
 int				first_algo(t_push_stack stack, t_instruc *insn, int id);
+int				quick_sort(t_push_stack s, t_instruc *insn, int id);
 
 t_result		*new_res(void);
-void			remove_first(t_result *res);
+void			res_remove(t_result *res, int index);
 void			ft_strswap(char **a, char **b);
 void			res_popback(t_result *res);
 void			res_pushback(t_result *res, char *value);
 void			res_pushfront(t_result *res, char *value);
 void			realloc_ins(t_result *res, size_t capacity);
+void			first_in_last(t_result *res);
+void			last_in_front(t_result *res);
 
 #endif

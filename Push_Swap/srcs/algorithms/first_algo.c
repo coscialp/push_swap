@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/09 13:21:17 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 08:48:08 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ int	first_algo(t_push_stack stack, t_instruc *insn, int id)
 	{
 		insn[PB].func(&stack);
 		stack.algo[id]->pushback(stack.algo[id], "pb");
+	}
+	else if (stack.stack_a->_size == 3 && smallest_index == 1 && \
+	stack.stack_a->_data->value < stack.stack_a->_data->_next->_next->value)
+	{
+		insn[SA].func(&stack);
+		stack.algo[id]->pushback(stack.algo[id], "sa");
 	}
 	else if (smallest_index <= ((int)stack.stack_a->_size / 2))
 	{

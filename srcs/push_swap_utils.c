@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/09 10:38:11 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 15:21:46 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	find_smallest_element(t_push_stack stack)
 	{
 		if (tmp->value < smallest)
 			smallest = tmp->value;
+		// dprintf(2, "DEBUG: value: %d smallest: %d\n", tmp->value, smallest);
 		tmp = tmp->_next;
 	}
+	// dprintf(2, "DEBUG: Choice: smallest: %d\n", smallest);
 	return (smallest);
 }
 
