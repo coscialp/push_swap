@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 08:48:05 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:00:55 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,16 @@ void			r_rotate_a(t_push_stack *stack);
 void			r_rotate_b(t_push_stack *stack);
 void			r_rotate_r(t_push_stack *stack);
 
-int				find_smallest_element(t_push_stack stack);
+int				find_smallest_element_a(t_push_stack stack);
+int				find_smallest_element_b(t_push_stack stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
+int				ft_log(size_t value);
+//int				change_sort_value(t_push_stack s);
 
 int				second_algo(t_push_stack stack, t_instruc *insn);
 int				first_algo(t_push_stack stack, t_instruc *insn, int id);
 int				quick_sort(t_push_stack s, t_instruc *insn, int id);
+int				merge_sort(t_push_stack stack, t_instruc *insn, int id);
 
 t_result		*new_res(void);
 void			res_remove(t_result *res, int index);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 17:51:38 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 10:58:13 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,10 @@ static void	push_swap(t_push_stack s, t_instruc *insn)
 	min_insn = INT_MAX;
 	while (i < 1)
 	{
-		int j = 0;
-		while (check_stack_p(s) && j++ <= 100)
+		while (check_stack_p(s))
 		{
 			if (i == 0)
-				tmp_nb = quick_sort(s, insn, i);
-				// tmp_nb = first_algo(s, insn, i);
-			// else if (i == 1)
-			// ft_dprintf(1, "tmp_nb: %d\n", tmp_nb);
+				tmp_nb = merge_sort(s, insn, i);
 		}
 		if (tmp_nb < min_insn)
 		{
@@ -72,7 +68,6 @@ static void	push_swap(t_push_stack s, t_instruc *insn)
 		}
 		i++;
 	}
-	// best_algo = 1; //test
 	i = -1;
 	while (++i < 7)
 	{

@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/11 08:52:46 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 10:58:20 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,11 @@
 
 int	merge_sort(t_push_stack stack, t_instruc *insn, int id)
 {
-	
+	(void)insn;
+	(void)id;
+	int		nb_chunk;
+
+	nb_chunk = ft_log(stack.stack_a->_size);
+	dprintf(2, "%d\n", nb_chunk);
+	return (0);
 }
