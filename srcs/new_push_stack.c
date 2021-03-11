@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:44:21 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/05 12:05:03 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 13:14:26 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_push_stack	new_push_stack(void)
 
 	push_stack.stack_a = new_stack();
 	push_stack.stack_b = new_stack();
+	push_stack.algo[0] = new_res();
 	push_stack.sa = swap_a;
 	push_stack.sb = swap_b;
 	push_stack.ss = swap_s;

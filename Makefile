@@ -12,7 +12,7 @@ WHITE_BOLD = \033[37m
 GREY = \033[3;90m
 ORANGE = \033[3;91m
 
-SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c
+SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c vector_result.c
 
 HEADER		=	Includes/
 
@@ -29,6 +29,8 @@ OBJ_PATH = bin/
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 NAME = push_swap.a
+
+FLAG = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address
 
 all: $(OBJ_PATH) $(NAME)
 	@make -C Checker
