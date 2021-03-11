@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 16:06:37 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 09:05:51 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void			r_rotate_a(t_push_stack *stack);
 void			r_rotate_b(t_push_stack *stack);
 void			r_rotate_r(t_push_stack *stack);
 
-int				find_smallest_element(t_push_stack stack);
+int				find_smallest_element_a(t_push_stack stack);
+int				find_smallest_element_b(t_push_stack stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
 
 int				first_algo(t_push_stack stack, t_instruc *insn, int id);

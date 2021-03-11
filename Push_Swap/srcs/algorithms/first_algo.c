@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/09 16:08:16 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/10 10:35:35 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ static bool	check_stack_a(t_push_stack s)
 
 int	first_algo(t_push_stack stack, t_instruc *insn, int id)
 {
-	int		smallest;
-	int		smallest_index;
+	static int	smallest;
+	static int	smallest_index;
 	static int nb_insn = 0;
+	static int begin = 0;
 
 	nb_insn++;
 	if (check_stack_a(stack) == 0)
@@ -40,12 +41,17 @@ int	first_algo(t_push_stack stack, t_instruc *insn, int id)
 		stack.algo[id]->pushback(stack.algo[id], "pa");
 		return (nb_insn);
 	}
-	smallest = find_smallest_element(stack);
+	if (begin == 0)
+	{
+		smallest = find_smallest_element_a(stack);
+		begin = 1;
+	}
 	smallest_index = find_smallest_element_index(stack, smallest);
 	if (smallest_index == 0)
 	{
 		insn[PB].func(&stack);
 		stack.algo[id]->pushback(stack.algo[id], "pb");
+		smallest = find_smallest_element_a(stack);
 	}
 	else if (stack.stack_a->_size == 3 && smallest_index == 1 && \
 	stack.stack_a->_data->value < stack.stack_a->_data->_next->_next->value)
