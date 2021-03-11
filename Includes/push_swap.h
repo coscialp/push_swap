@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/10 09:05:51 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 10:59:39 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define PUSH_SWAP_H
 
 # include "../Dependencies/libft/includes/stack.h"
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                  Define                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 # define STDIN 0
 # define STDOUT 1
@@ -23,7 +29,19 @@
 # define NONUM 0x000002
 # define NOTINS 0x000003
 
-typedef enum e_cmd
+# define CHECKER 0x000010
+# define PUSH_SWAP 0x000011
+
+# define STACK_A 0x000012
+# define STACK_B 0x000013
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                  Enum                                     ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+typedef enum e_ins
 {
 	Sa = 0x7361,
 	Sb = 0x7362,
@@ -36,9 +54,9 @@ typedef enum e_cmd
 	Rra = 0x727261,
 	Rrb = 0x727262,
 	Rrr = 0x727272
-}			t_cmd;
+}			t_ins;
 
-typedef enum e_ins
+typedef enum e_ins_index
 {
 	SA,
 	SB,
@@ -51,7 +69,13 @@ typedef enum e_ins
 	RRA,
 	RRB,
 	RRR,
-}			t_ins;
+}			t_ins_index;
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                  Struct Result                            ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 typedef struct s_result
 {
@@ -64,6 +88,12 @@ typedef struct s_result
 	void		(*popback)(struct s_result *);
 	void		(*remove)(struct s_result *, int);
 }				t_result;
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             Struct Push_Swap                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 typedef struct s_push_stack		t_push_stack;
 struct s_push_stack
@@ -85,12 +115,25 @@ struct s_push_stack
 	void			(*rrr)(t_push_stack *);
 };
 
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             Struct Instruction                            ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
 typedef struct s_instruction	t_instruc;
 struct s_instruction
 {
 	int		value;
 	void	(*func)(t_push_stack *);
 };
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             Struct Pattern                                ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
 
 typedef struct s_pattern
 {
@@ -100,13 +143,23 @@ typedef struct s_pattern
 	char		*newpattern[4];
 }				t_pattern;
 
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                Error                                      ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
 void			log_error(int error);
 void			stack_state(t_push_stack s, size_t max, size_t i);
-size_t			st_max(size_t a, size_t b);
-size_t			st_min(size_t a, size_t b);
-void			check_stack(t_push_stack s);
-bool			check_stack_p(t_push_stack s);
+bool			check_stack(t_push_stack s, int program);
 bool			no_duplicate_number(t_stack *a, int value);
+void			parser(t_push_stack *s, t_instruc *insn, char **arg);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             struct Push_Swap.c                            ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 t_push_stack	new_push_stack(void);
 void			swap_a(t_push_stack *stack);
@@ -121,12 +174,33 @@ void			r_rotate_a(t_push_stack *stack);
 void			r_rotate_b(t_push_stack *stack);
 void			r_rotate_r(t_push_stack *stack);
 
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             Searching value and index                     ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
 int				find_smallest_element_a(t_push_stack stack);
 int				find_smallest_element_b(t_push_stack stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
+int				find_median(t_stack *s);
+int				get_value(char **ptr);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                               Algorithm                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 int				first_algo(t_push_stack stack, t_instruc *insn, int id);
 int				quick_sort(t_push_stack s, t_instruc *insn, int id);
+bool			check_order_stack(t_push_stack s, int id_stack);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                             struct result.c                               ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
 
 t_result		*new_res(void);
 void			res_remove(t_result *res, int index);

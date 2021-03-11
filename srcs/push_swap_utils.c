@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/10 09:05:26 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:00:43 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int	find_smallest_element_a(t_push_stack stack)
 	{
 		if (tmp->value < smallest)
 			smallest = tmp->value;
-		// dprintf(2, "DEBUG: value: %d smallest: %d\n", tmp->value, smallest);
 		tmp = tmp->_next;
 	}
-	// dprintf(2, "DEBUG: Choice: smallest: %d\n", smallest);
 	return (smallest);
 }
 
@@ -41,10 +39,8 @@ int	find_smallest_element_b(t_push_stack stack)
 	{
 		if (tmp->value < smallest)
 			smallest = tmp->value;
-		// dprintf(2, "DEBUG: value: %d smallest: %d\n", tmp->value, smallest);
 		tmp = tmp->_next;
 	}
-	// dprintf(2, "DEBUG: Choice: smallest: %d\n", smallest);
 	return (smallest);
 }
 

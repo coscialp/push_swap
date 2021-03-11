@@ -1,47 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   find_median.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 15:05:39 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/10 11:31:05 by coscialp         ###   ########lyon.fr   */
+/*   Created: 2021/03/11 10:58:58 by coscialp          #+#    #+#             */
+/*   Updated: 2021/03/11 10:59:46 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Includes/push_swap.h"
+#include "push_swap.h"
 #include "libft.h"
 
-static bool	check_stack_a(t_push_stack s)
-{
-	t_node_stack	*a;
-
-	a = s.stack_a->_data;
-	while (a->_next)
-	{
-		if (a->value > a->_next->value)
-			return (1);
-		a = a->_next;
-	}
-	return (0);
-}
-
-static bool	check_stack_b(t_push_stack s)
-{
-	t_node_stack	*a;
-
-	a = s.stack_b->_data;
-	while (a->_next)
-	{
-		if (a->value < a->_next->value)
-			return (1);
-		a = a->_next;
-	}
-	return (0);
-}
-
-void	ft_intswap(int *a, int *b)
+static void	ft_intswap(int *a, int *b)
 {
 	int tmp;
 
@@ -77,9 +49,4 @@ int	find_median(t_stack *s)
 	}
 	median = stack[s->_size / 2];
 	return (median);
-}
-
-int quick_sort(t_push_stack s, t_instruc *insn, int id)
-{
-	return (0);
 }

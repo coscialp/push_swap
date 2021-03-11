@@ -6,26 +6,12 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:18:35 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 10:50:35 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../../Includes/push_swap.h"
-
-int	get_value(char **ptr)
-{
-	int	value;
-
-	value = 0;
-	while (**ptr != '\0')
-	{
-		value <<= 8;
-		value += **ptr;
-		(*ptr)++;
-	}
-	return (value);
-}
+#include "push_swap.h"
 
 char	**clone(char **str)
 {
@@ -61,29 +47,7 @@ static void	checker(t_push_stack s, t_instruc *insn, int stop)
 			log_error(NOTINS);
 		ft_strdel(&line);
 	}
-	check_stack(s);
-}
-
-void	parser(t_push_stack *s, t_instruc *insn, char **arg)
-{
-	char	*tok;
-
-	tok = NULL;
-	tok = ft_strsep(arg, " ");
-	while (tok)
-	{
-		if (ft_stris(tok, ft_is_number))
-		{
-			if (s->stack_b->push(s->stack_b, ft_atoi(tok)) == -1 || \
-			no_duplicate_number(s->stack_a, ft_atoi(tok)))
-				log_error(DUNUM);
-		}
-		else
-			log_error(NONUM);
-		tok = ft_strsep(arg, " ");
-	}
-	while (s->stack_b->_size)
-		insn[3].func(s);
+	check_stack(s, CHECKER);
 }
 
 int	main(int ac, char **av)

@@ -14,7 +14,7 @@ then
 	while [[ ${COUNTER} -lt $2 ]]
 	do
 		ARG=`ruby -e "puts (1..$1).to_a.shuffle.join(' ')"`
-		TMP=`./Push_Swap/pushswap $ARG | wc -l | sed 's/ //g'`
+		TMP=`./Srcs/Push_Swap/push_swap $ARG | wc -l | sed 's/ //g'`
 		(( COUNTER += 1 ))
 		PERCENT=$((COUNTER * 100 / $2))
 		(( SUM += ${TMP} ))

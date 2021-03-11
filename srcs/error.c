@@ -6,13 +6,13 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/09 10:23:20 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 10:41:58 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/push_swap.h"
+#include "push_swap.h"
 
-void	check_stack(t_push_stack s)
+static void	check_stack_checker(t_push_stack s)
 {
 	t_node_stack	*a;
 
@@ -33,6 +33,31 @@ void	check_stack(t_push_stack s)
 	}
 	ft_dprintf(1, "\033[32;01m[OK]\033[00m\n");
 	exit(0);
+}
+
+static bool	check_stack_pushswap(t_push_stack s)
+{
+	t_node_stack	*a;
+
+	if (s.stack_b->_size != 0)
+		return (1);
+	a = s.stack_a->_data;
+	while (a->_next)
+	{
+		if (a->value > a->_next->value)
+			return (1);
+		a = a->_next;
+	}
+	return (0);
+}
+
+bool	check_stack(t_push_stack s, int program)
+{
+	if (program == CHECKER)
+		check_stack_checker(s);
+	else if (program == PUSH_SWAP)
+		return (check_stack_pushswap(s));
+	return (0);
 }
 
 void	stack_state(t_push_stack s, size_t max, size_t i)
