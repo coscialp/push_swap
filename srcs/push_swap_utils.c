@@ -6,11 +6,16 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/11 11:20:49 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/11 11:40:50 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	change_sort_value(t_push_stack s)
+{
+	
+}
 
 int	ft_log(size_t value)
 {
