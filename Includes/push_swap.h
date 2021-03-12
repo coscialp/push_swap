@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 11:20:38 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 13:12:29 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@
 # define STACK_A 0x000012
 # define STACK_B 0x000013
 
+# define SA "sa"
+# define SB "sb"
+# define SS "ss"
+# define PA "pa"
+# define PB "pb"
+# define RA "ra"
+# define RB "rb"
+# define RR "rr"
+# define RRA "rra"
+# define RRB "rra"
+# define RRR "rrr"
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                                  Enum                                     ┃
@@ -55,21 +67,6 @@ typedef enum e_ins
 	Rrb = 0x727262,
 	Rrr = 0x727272
 }			t_ins;
-
-typedef enum e_ins_index
-{
-	SA,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR,
-}			t_ins_index;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -173,6 +170,7 @@ void			rotate_r(t_push_stack *stack);
 void			r_rotate_a(t_push_stack *stack);
 void			r_rotate_b(t_push_stack *stack);
 void			r_rotate_r(t_push_stack *stack);
+t_push_stack	push_stack_copy(t_push_stack s);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -180,9 +178,12 @@ void			r_rotate_r(t_push_stack *stack);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int				find_smallest_element_a(t_push_stack stack);
-int				find_smallest_element_b(t_push_stack stack);
+int				find_smallest_element(t_push_stack stack, int id_stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
+t_push_stack	bubble_sort_stack(t_push_stack s);
+void			change_sort_value(t_push_stack *real_stack, t_push_stack copy);
+void			add_sort_value(t_push_stack *stack);
+void			ft_intswap(int *a, int *b);
 int				ft_log(size_t value);
 int				find_median(t_stack *s);
 int				get_value(char **ptr);
@@ -194,9 +195,9 @@ int				get_value(char **ptr);
 */
 
 int				second_algo(t_push_stack stack, t_instruc *insn);
-int				first_algo(t_push_stack stack, t_instruc *insn, int id);
-int				quick_sort(t_push_stack s, t_instruc *insn, int id);
-int				merge_sort(t_push_stack stack, t_instruc *insn, int id);
+int				first_algo(t_push_stack stack, int id);
+int				quick_sort(t_push_stack s, int id);
+int				merge_sort(t_push_stack stack, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
 
 /*

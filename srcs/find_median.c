@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   find_median.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:58:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 10:59:46 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 13:12:31 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-static void	ft_intswap(int *a, int *b)
+void	ft_intswap(int *a, int *b)
 {
 	int tmp;
 
