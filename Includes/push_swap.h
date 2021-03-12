@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 11:41:06 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 13:46:46 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ int				first_algo(t_push_stack stack, int id);
 int				quick_sort(t_push_stack s, int id);
 int				merge_sort(t_push_stack stack, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
+void			change_by_pattern(t_push_stack *s, int id);
+void			print_instruction(t_result *r);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

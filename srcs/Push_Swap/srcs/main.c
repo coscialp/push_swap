@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 11:39:58 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 13:46:55 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 static void	push_swap(t_push_stack s)
 {
 	size_t	i;
-	static t_pattern pattern[7] = {
-		{2, 1, {SA, SB}, {SS}},
-		{2, 1, {SB, SA}, {SS}},
-		{2, 1, {RA, RB}, {RR}},
-		{2, 1, {RB, RA}, {RR}},
-		{2, 1, {RRA, RRB}, {RRR}},
-		{2, 1, {RRB, RRA}, {RRR}},
-		{3, 2, {RA, PB, RRA}, {SA, PB}}
-	};
 	int	tmp_nb;
 	int	min_insn;
 	int	best_algo;
@@ -37,7 +28,8 @@ static void	push_swap(t_push_stack s)
 		while (check_stack(s, PUSH_SWAP))
 		{
 			if (i == 0)
-				tmp_nb = merge_sort(s, i);
+				tmp_nb = first_algo(s, i);
+				// tmp_nb = merge_sort(s, i);
 		}
 		if (tmp_nb < min_insn)
 		{
@@ -46,59 +38,8 @@ static void	push_swap(t_push_stack s)
 		}
 		i++;
 	}
-	i = -1;
-	while (++i < 7)
-	{
-		if (pattern[i].size == 3 && s.algo[best_algo]->size >= 3)
-		{
-			size_t	j = -1;
-			while (++j < s.algo[best_algo]->size - 2)
-			{
-				if (!ft_strcmp(pattern[i].current[0], s.algo[best_algo]->ins[j]) && \
-					!ft_strcmp(pattern[i].current[1], s.algo[best_algo]->ins[j + 1]) && \
-					!ft_strcmp(pattern[i].current[2], s.algo[best_algo]->ins[j + 2]))
-					{
-						s.algo[best_algo]->remove(s.algo[best_algo], j);
-						s.algo[best_algo]->remove(s.algo[best_algo], j);
-						s.algo[best_algo]->remove(s.algo[best_algo], j);
-						int k = pattern[i].new_size;
-						size_t l = -1;
-						while (++l < j)
-							first_in_last(s.algo[best_algo]);
-						while (--k >= 0)
-							s.algo[best_algo]->pushfront(s.algo[best_algo], pattern[i].newpattern[k]);
-						l = -1;
-						while (++l < j)
-							last_in_front(s.algo[best_algo]);
-					}
-			}
-		}
-		else if (pattern[i].size == 2 && s.algo[best_algo]->size >= 2)
-		{
-			size_t	j = -1;
-			while (++j < s.algo[best_algo]->size - 1)
-			{
-				if (!ft_strcmp(pattern[i].current[0], s.algo[best_algo]->ins[j]) && \
-					!ft_strcmp(pattern[i].current[1], s.algo[best_algo]->ins[j + 1]))
-					{
-						s.algo[best_algo]->remove(s.algo[best_algo], j);
-						s.algo[best_algo]->remove(s.algo[best_algo], j);
-						int k = pattern[i].new_size;
-						size_t l = -1;
-						while (++l < j)
-							first_in_last(s.algo[best_algo]);
-						while (--k >= 0)
-							s.algo[best_algo]->pushfront(s.algo[best_algo], pattern[i].newpattern[k]);
-						l = -1;
-						while (++l < j)
-							last_in_front(s.algo[best_algo]);
-					}
-			}
-		}
-	}
-	i = -1;
-	while (++i < s.algo[best_algo]->size)
-		ft_dprintf(STDOUT, "%s\n", s.algo[best_algo]->ins[i]);
+	change_by_pattern(&s, best_algo);
+	print_instruction(s.algo[best_algo]);
 }
 
 int	main(int ac, char **av)
