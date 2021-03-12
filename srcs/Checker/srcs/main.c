@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 11:22:01 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 13:49:30 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ char	**clone(char **str)
 
 static void	checker(t_push_stack s, t_instruc *insn, int stop)
 {
-	int				value;
 	static size_t	nb = 0;
 	short			i;
 	static char		*line = NULL;
 
 	while (get_next_line(0, &line) > 0)
 	{
-		value = get_value(clone(&line));
 		i = -1;
 		while (++i < 11)
 		{
-			if (insn[i].value == value && nb++ >= 0)
+			if (insn[i].value == get_value(clone(&line)) && nb++ >= 0)
 			{
 				insn[i].func(&s);
 				if (stop == 2)

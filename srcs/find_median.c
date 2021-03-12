@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:58:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 13:12:31 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 14:17:44 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_intswap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -24,10 +24,10 @@ void	ft_intswap(int *a, int *b)
 
 int	find_median(t_stack *s)
 {
-	t_node_stack *tmp;
-	int	median;
-	int	*stack;
-	size_t	i;
+	t_node_stack	*tmp;
+	int				median;
+	int				*stack;
+	size_t			i;
 
 	i = -1;
 	stack = ft_xmalloc(sizeof(int) * s->_size);
@@ -44,7 +44,7 @@ int	find_median(t_stack *s)
 		{
 			ft_intswap(&stack[i], &stack[i + 1]);
 			i = -1;
-			continue;
+			continue ;
 		}
 	}
 	median = stack[s->_size / 2];

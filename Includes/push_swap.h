@@ -6,7 +6,11 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/03/12 13:12:29 by akerdeka         ###   ########lyon.fr   */
+=======
+/*   Updated: 2021/03/12 13:46:46 by coscialp         ###   ########lyon.fr   */
+>>>>>>> 6aeae18c00019c18646b572f06157216f7944dde
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +203,8 @@ int				first_algo(t_push_stack stack, int id);
 int				quick_sort(t_push_stack s, int id);
 int				merge_sort(t_push_stack stack, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
+void			change_by_pattern(t_push_stack *s, int id);
+void			print_instruction(t_result *r);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
