@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 13:46:26 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 14:55:18 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	insert_instruction(t_pattern pattern, t_result *r, size_t index)
 	while (++l < index)
 		last_in_front(r);
 }
-
-void	change_by_pattern(t_push_stack *s, int id)
+ 
+void	  change_by_pattern(t_push_stack *s, int id)
 {
 	static t_pattern pattern[7] = {
 		{2, 1, {SA, SB}, {SS}},
