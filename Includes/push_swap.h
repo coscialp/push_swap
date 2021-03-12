@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/03/12 13:12:29 by akerdeka         ###   ########lyon.fr   */
-=======
-/*   Updated: 2021/03/12 13:46:46 by coscialp         ###   ########lyon.fr   */
->>>>>>> 6aeae18c00019c18646b572f06157216f7944dde
+/*   Updated: 2021/03/12 15:13:40 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +44,7 @@
 # define RB "rb"
 # define RR "rr"
 # define RRA "rra"
-# define RRB "rra"
+# define RRB "rrb"
 # define RRR "rrr"
 
 /*
@@ -175,6 +171,7 @@ void			r_rotate_a(t_push_stack *stack);
 void			r_rotate_b(t_push_stack *stack);
 void			r_rotate_r(t_push_stack *stack);
 t_push_stack	push_stack_copy(t_push_stack s);
+t_push_stack	push_stack_copy(t_push_stack s);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -199,7 +196,7 @@ int				get_value(char **ptr);
 */
 
 int				second_algo(t_push_stack stack, t_instruc *insn);
-int				first_algo(t_push_stack stack, int id);
+int				first_algo(t_push_stack copy, t_push_stack *s, int id);
 int				quick_sort(t_push_stack s, int id);
 int				merge_sort(t_push_stack stack, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
