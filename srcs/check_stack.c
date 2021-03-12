@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:51:01 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 13:51:15 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 15:22:49 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

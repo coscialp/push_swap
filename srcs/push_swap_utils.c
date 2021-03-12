@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/12 14:17:48 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 15:30:28 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,35 @@ t_push_stack	push_stack_copy(t_push_stack s)
 void	add_sort_value(t_push_stack *stack)
 {
 	size_t	sort_value;
+	t_node_stack *tmp;
 
 	sort_value = 0;
-	while (stack->stack_a->_data)
+	tmp = stack->stack_a->_data;
+	while (tmp)
 	{
-		if (!stack->stack_a->_data)
-			break ;
-		stack->stack_a->_data->sort_value = sort_value;
+		tmp->sort_value = sort_value;
 		sort_value++;
-		stack->stack_a->_data = stack->stack_a->_data->_next;
+		tmp = tmp->_next;
 	}
 }
 
 void	change_sort_value(t_push_stack *real, t_push_stack copy)
 {
 	t_node_stack	*tmp;
+	t_node_stack	*tmp_real;
 
 	tmp = copy.stack_a->_data;
-	while (real->stack_a->_data)
+	tmp_real = real->stack_a->_data;
+	while (tmp_real)
 	{
-		if (!real->stack_a->_data)
-			break ;
-		while (copy.stack_a->_data)
+		while (tmp)
 		{
-			if (copy.stack_a->_data->value == real->stack_a->_data->value)
-				real->stack_a->_data->sort_value = copy.stack_a->_data->sort_value;
-			copy.stack_a->_data = copy.stack_a->_data->_next;
+			if (tmp->value == tmp_real->value)
+				tmp_real->sort_value =tmp->sort_value;
+			tmp = tmp->_next;
 		}
-		copy.stack_a->_data = tmp;
-		real->stack_a->_data = real->stack_a->_data->_next;
+		tmp = copy.stack_a->_data;
+		tmp_real = tmp_real->_next;
 	}
 }
 
@@ -66,7 +66,6 @@ t_push_stack	bubble_sort_stack(t_push_stack s)
 	{
 		if (!tmp->_next)
 			break ;
-		dprintf(2, "val= %d\tnext_val=%d\n", tmp->value, tmp->_next->value);
 		if (tmp->value > tmp->_next->value)
 		{
 			ft_intswap(&tmp->value, &tmp->_next->value);
