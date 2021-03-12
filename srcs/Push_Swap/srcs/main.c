@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 15:08:53 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 16:56:22 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ static void	push_swap(t_push_stack s)
 	min_insn = INT_MAX;
 	while (i < 1)
 	{
-		while (check_stack(s, PUSH_SWAP))
-		{
-			if (i == 0)
-				// tmp_nb = first_algo(s, i);
-				tmp_nb = merge_sort(s, i);
-		}
+		if (i == 0)
+			tmp_nb = first_algo(push_stack_copy(s), &s, i);
+		else if (i == 1)
+			tmp_nb = merge_sort(push_stack_copy(s), i);
 		if (tmp_nb < min_insn)
 		{
 			min_insn = tmp_nb;
@@ -38,7 +36,6 @@ static void	push_swap(t_push_stack s)
 		}
 		i++;
 	}
-	change_by_pattern(&s, best_algo);
 	print_instruction(s.algo[best_algo]);
 }
 

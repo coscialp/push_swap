@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 15:08:48 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/12 16:55:59 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ static void	delete_instruction(t_push_stack *s, int index, int each, int algo)
 static bool compare_pattern(t_pattern pattern, t_result *res, size_t index)
 {
 	int	i;
+	static int cmp = 0;
 
 	i = -1;
+	cmp++;
 	while (++i < pattern.size)
-		if (res->size < (size_t)(i + index) || ft_strcmp(res->ins[i + index], pattern.current[i]))
+		if (res->size <= (size_t)(i + index) || ft_strcmp(res->ins[i + index], pattern.current[i]))
 			return (1);
 	return (0);
 }
@@ -76,7 +78,7 @@ void	  change_by_pattern(t_push_stack *s, int id)
 		{
 			if (!compare_pattern(pattern[i], s->algo[id], j))
 			{
-				delete_instruction(s, j, 3, id);
+				delete_instruction(s, j, pattern[i].size, id);
 				insert_instruction(pattern[i], s->algo[id], j);
 			}
 		}
