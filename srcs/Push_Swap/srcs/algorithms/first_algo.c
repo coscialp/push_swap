@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/12 15:08:04 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/31 10:36:45 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 {
 	int	smallest;
 	int	smallest_index;
-	int begin;
+	int	begin;
 
 	begin = 0;
 	while (check_stack(copy, PUSH_SWAP))
@@ -57,7 +57,6 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 			s->algo[id]->pushback(s->algo[id], RRA);
 		}
 	}
-	// print_instruction(s->algo[id]);
 	change_by_pattern(s, id);
 	return (s->algo[id]->size);
 }

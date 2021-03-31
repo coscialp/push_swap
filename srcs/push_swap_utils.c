@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/12 15:30:28 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/03/31 10:32:35 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_push_stack	push_stack_copy(t_push_stack s)
 
 void	add_sort_value(t_push_stack *stack)
 {
-	size_t	sort_value;
-	t_node_stack *tmp;
+	size_t			sort_value;
+	t_node_stack	*tmp;
 
 	sort_value = 0;
 	tmp = stack->stack_a->_data;
@@ -49,7 +49,7 @@ void	change_sort_value(t_push_stack *real, t_push_stack copy)
 		while (tmp)
 		{
 			if (tmp->value == tmp_real->value)
-				tmp_real->sort_value =tmp->sort_value;
+				tmp_real->sort_value = tmp->sort_value;
 			tmp = tmp->_next;
 		}
 		tmp = copy.stack_a->_data;
