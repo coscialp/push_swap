@@ -13,7 +13,7 @@ GREY = \033[3;90m
 ORANGE = \033[3;91m
 
 SRCS_NAME	=	new_push_stack.c push.c swap.c rotate.c r_rotate.c push_swap_utils.c result.c error.c get_value.c parser.c \
-				check_order.c find_median.c check_stack.c result_modifier.c
+				check_order.c find_median.c check_stack.c result_modifier.c find_smallest.c
 
 HEADER		=	Includes/
 
