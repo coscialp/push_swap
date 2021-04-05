@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
 /*   Updated: 2021/03/13 15:54:57 by akerdeka         ###   ########lyon.fr   */
@@ -16,9 +16,9 @@
 static void	push_swap(t_push_stack s)
 {
 	size_t	i;
-	int	tmp_nb;
-	int	min_insn;
-	int	best_algo;
+	int		tmp_nb;
+	int		min_insn;
+	int		best_algo;
 
 	i = 0;
 	best_algo = 0;

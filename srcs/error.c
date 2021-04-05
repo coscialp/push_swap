@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 13:51:42 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/31 15:55:48 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ void	stack_state(t_push_stack s, size_t max, size_t i)
 			ft_dprintf(2, "           | %-10d\n", b->value);
 			b = b->_next;
 		}
-		max--;
+		--max;
 	}
-	while (max > 0)
+	while (max-- > 0)
 	{
 		ft_dprintf(2, "%10d | %-10d\n", a->value, b->value);
 		a = a->_next;
 		b = b->_next;
-		--max;
 	}
 	ft_dprintf(2, "------------------------\n         a | b      \n");
 	ft_dprintf(2, "    nb instruction = %d\n", i);

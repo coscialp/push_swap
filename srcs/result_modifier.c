@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:52:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 13:57:19 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/03/31 10:33:06 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	realloc_ins(t_result *res, size_t capacity)
 
 void	res_pushfront(t_result *res, char *value)
 {
-	int i;
+	int	i;
 
 	res->pushback(res, value);
 	i = res->size;

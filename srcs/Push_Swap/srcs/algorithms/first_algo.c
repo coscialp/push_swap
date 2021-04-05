@@ -17,7 +17,7 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 {
 	int	smallest;
 	int	smallest_index;
-	int begin;
+	int	begin;
 
 	begin = 0;
 	while (check_stack(copy, PUSH_SWAP))
@@ -57,7 +57,6 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 			s->algo[id]->pushback(s->algo[id], RRA);
 		}
 	}
-	// print_instruction(s->algo[id]);
 	change_by_pattern(s, id);
 	return (s->algo[id]->size);
 }
