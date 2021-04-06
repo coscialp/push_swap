@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 15:48:41 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 17:13:37 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void	change_by_pattern(t_push_stack *s, int id)
 	int					i;
 	size_t				j;
 	static t_pattern	pattern[10] = {
+		{3, 2, {Ra, Pb, Rra}, {Sa, Pb}},
+		{3, 2, {Pb, Ra, Pa}, {Sa, Ra}},
 		{2, 1, {Sa, Sb}, {Ss}},
 		{2, 1, {Sb, Sa}, {Ss}},
 		{2, 1, {Ra, Rb}, {Rr}},
 		{2, 1, {Rb, Ra}, {Rr}},
 		{2, 1, {Rra, Rrb}, {Rrr}},
 		{2, 1, {Rrb, Rra}, {Rrr}},
-		{3, 2, {Ra, Pb, Rra}, {Sa, Pb}},
-		{3, 2, {Pb, Ra, Pa}, {Sa, Ra}},
-		{2, 0, {Pb, Pa}, {Pa}},
+		{2, 0, {Pb, Pa}, {Ra}},
 		{2, 0, {Pa, Pb}, {Pb}}
 	};
 

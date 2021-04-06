@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/06 15:54:56 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 18:42:24 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,45 @@ typedef enum e_value_index
 	Index,
 }           t_val_idx;
 
+void	find_position(t_stack s, int value, int *first, int *second)
+{
+	t_node_stack	*tmp;
+	int				*stack;
+	size_t			i;
+
+	i = -1;
+	stack = ft_xmalloc(sizeof(int) * (s._size + 1));
+	tmp = s._data;
+	while (++i < s._size)
+	{
+		stack[i] = tmp->value;
+		tmp = tmp->_next;
+	}
+	stack[i] = value;
+	s._size++;
+	i = -1;
+	while (++i < (s._size - 1))
+	{
+		if (stack[i] < stack[i + 1])
+		{
+			ft_intswap(&stack[i], &stack[i + 1]);
+			i = -1;
+			continue ;
+		}
+	}
+	i = -1;
+	while (++i < s._size - 1)
+	{
+		if (stack[i] == value)
+		{
+			*first = stack[i + 1];
+			*second = stack[i - 1];
+			return ;
+		}
+	}
+}
+
+
 static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 {
 	int	element[2];
@@ -58,7 +97,7 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 		while (element[Index] != 0)
 		{
-			if (element[Index] <= (int)cpy->stack_b->_size / 2)
+			if (element[Index] < (int)cpy->stack_b->_size / 2)
 			{
 				cpy->rb(cpy);
 				s->algo[id]->pushback(s->algo[id], Rb);
@@ -93,43 +132,51 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 		}
 		cpy->pb(cpy);
 		s->algo[id]->pushback(s->algo[id], Pb);
-		cpy->rb(cpy);
-		s->algo[id]->pushback(s->algo[id], Rb);
 	}
 	else
 	{
-		int med_b = find_median(cpy->stack_b);
-		while (cpy->stack_a->_data && cpy->stack_b->_size >= 2 && (cpy->stack_b->_data->value > cpy->stack_a->_data->value || cpy->stack_b->last(cpy->stack_b)->value < cpy->stack_a->_data->value))
+		int before[2];
+		int after[2];
+		if (cpy->stack_a->_data && cpy->stack_b->_size >= 2)
 		{
-			if (cpy->stack_a->_data->value < med_b)
+			find_position(*(cpy->stack_b), cpy->stack_a->_data->value, &before[Value], &after[Value]);
+			before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
+			after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
+			while ((cpy->stack_b->_data->value > cpy->stack_a->_data->value || cpy->stack_b->last(cpy->stack_b)->value < cpy->stack_a->_data->value))
 			{
-				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rrb);
+				if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
+				{
+					cpy->rb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rb);
+				}
+				else
+				{
+					cpy->rrb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rrb);
+				}
 			}
-			else
+			cpy->pb(cpy);
+			s->algo[id]->pushback(s->algo[id], Pb);
+		}
+	}
+	element[Value] = find_greatest_element(*cpy, STACK_B);
+	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+	if (check_order_stack(*cpy, STACK_A) == 0)
+	{
+		while (element[Index] != 0)
+		{
+			if (element[Index] <= (int)cpy->stack_b->_size / 2)
 			{
 				cpy->rb(cpy);
 				s->algo[id]->pushback(s->algo[id], Rb);
 			}
+			else
+			{
+				cpy->rrb(cpy);
+				s->algo[id]->pushback(s->algo[id], Rrb);
+			}
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 		}
-		cpy->pb(cpy);
-		s->algo[id]->pushback(s->algo[id], Pb);
-	}
-	element[Value] = find_greatest_element(*cpy, STACK_B);
-	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-	while (element[Index] != 0)
-	{
-		if (element[Index] <= (int)cpy->stack_b->_size / 2)
-		{
-			cpy->rb(cpy);
-			s->algo[id]->pushback(s->algo[id], Rb);
-		}
-		else
-		{
-			cpy->rrb(cpy);
-			s->algo[id]->pushback(s->algo[id], Rrb);
-		}
-		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 	}
 }
 
@@ -167,11 +214,139 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 		// dprintf(2, "BUG\n");
 		cpy->ra(cpy);
 		s->algo[id]->pushback(s->algo[id], Ra);
+		int	element[2];
+		if ((element[Value] = find_greatest_element(*cpy, STACK_B)) < hold_first[Value])
+		{
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			if (element[Index] != 0)
+			{
+				if (element[Index] <= (int)cpy->stack_b->_size / 2)
+				{
+					cpy->rb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rb);
+				}
+				else
+				{
+					cpy->rrb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rrb);
+				}
+				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			}
+		}
+		else if (find_smallest_element(*cpy, STACK_B) > hold_first[Value])
+		{
+			element[Value] = find_greatest_element(*cpy, STACK_B);
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			if (element[Index] != 0)
+			{
+				if (element[Index] <= (int)cpy->stack_b->_size / 2)
+				{
+					cpy->rb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rb);
+				}
+				else
+				{
+					cpy->rrb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rrb);
+				}
+				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			}
+		}
+		else
+		{
+			int before[2];
+			int after[2];
+			if (cpy->stack_b->_size >= 2)
+			{
+				find_position(*(cpy->stack_b), hold_first[Value], &before[Value], &after[Value]);
+				before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
+				after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
+				if ((cpy->stack_b->_data->value > hold_first[Value] || cpy->stack_b->last(cpy->stack_b)->value < hold_first[Value]))
+				{
+					if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
+					{
+						cpy->rb(cpy);
+						s->algo[id]->pushback(s->algo[id], Rb);
+					}
+					else
+					{
+						cpy->rrb(cpy);
+						s->algo[id]->pushback(s->algo[id], Rrb);
+					}
+				}
+				cpy->pb(cpy);
+				s->algo[id]->pushback(s->algo[id], Pb);
+			}
+		}
 	}
 	else
 	{
 		cpy->rra(cpy);
 		s->algo[id]->pushback(s->algo[id], Rra);
+		int	element[2];
+		if ((element[Value] = find_greatest_element(*cpy, STACK_B)) < hold_last[Value])
+		{
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			if (element[Index] != 0)
+			{
+				if (element[Index] <= (int)cpy->stack_b->_size / 2)
+				{
+					cpy->rb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rb);
+				}
+				else
+				{
+					cpy->rrb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rrb);
+				}
+				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			}
+		}
+		else if (find_smallest_element(*cpy, STACK_B) > hold_last[Value])
+		{
+			element[Value] = find_greatest_element(*cpy, STACK_B);
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			if (element[Index] != 0)
+			{
+				if (element[Index] <= (int)cpy->stack_b->_size / 2)
+				{
+					cpy->rb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rb);
+				}
+				else
+				{
+					cpy->rrb(cpy);
+					s->algo[id]->pushback(s->algo[id], Rrb);
+				}
+				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+			}
+		}
+		/*else
+		{
+			int before[2];
+			int after[2];
+			if (cpy->stack_b->_size >= 2)
+			{
+				find_position(*(cpy->stack_b), hold_last[Value], &before[Value], &after[Value]);
+				before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
+				after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
+				if ((cpy->stack_b->_data->value > hold_last[Value] || cpy->stack_b->last(cpy->stack_b)->value < hold_last[Value]))
+				{
+					if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
+					{
+						cpy->rb(cpy);
+						s->algo[id]->pushback(s->algo[id], Rb);
+					}
+					else
+					{
+						cpy->rrb(cpy);
+						s->algo[id]->pushback(s->algo[id], Rrb);
+					}
+				}
+				cpy->pb(cpy);
+				s->algo[id]->pushback(s->algo[id], Pb);
+			}
+		}*/
 	}
 }
 
