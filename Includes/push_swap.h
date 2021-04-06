@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 12:37:33 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:35:17 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ typedef enum e_ins
 
 typedef struct s_result
 {
-	char		**ins;
+	t_ins		*ins;
 	size_t		size;
 	size_t		capacity;
 
-	void		(*pushback)(struct s_result *, char *);
-	void		(*pushfront)(struct s_result *, char *);
+	void		(*pushback)(struct s_result *, t_ins);
+	void		(*pushfront)(struct s_result *, t_ins);
 	void		(*popback)(struct s_result *);
 	void		(*remove)(struct s_result *, int);
 }				t_result;
@@ -135,8 +135,8 @@ typedef struct s_pattern
 {
 	int			size;
 	int			new_size;
-	char		*current[4];
-	char		*newpattern[4];
+	int			current[4];
+	int			newpattern[4];
 }				t_pattern;
 
 /*
@@ -213,9 +213,10 @@ void			print_instruction(t_result *r);
 t_result		*new_res(void);
 void			res_remove(t_result *res, int index);
 void			ft_strswap(char **a, char **b);
+void			ft_insswap(t_ins *a, t_ins *b);
 void			res_popback(t_result *res);
-void			res_pushback(t_result *res, char *value);
-void			res_pushfront(t_result *res, char *value);
+void			res_pushback(t_result *res, t_ins value);
+void			res_pushfront(t_result *res, t_ins value);
 void			realloc_ins(t_result *res, size_t capacity);
 void			first_in_last(t_result *res);
 void			last_in_front(t_result *res);

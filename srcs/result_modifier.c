@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:52:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 12:38:40 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:27:04 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,37 @@
 void	realloc_ins(t_result *res, size_t capacity)
 {
 	size_t	i;
-	char	**ret;
+	t_ins	*ret;
 
 	i = -1;
-	ret = ft_memalloc(capacity * sizeof(char *));
+	ret = ft_memalloc(capacity * sizeof(t_ins *));
 	while (++i < res->size)
-	{
-		ret[i] = ft_calloc(4, 1);
 		ret[i] = res->ins[i];
-	}
 	i = -1;
-	while (--i < res->size)
-		free(res->ins[i]);
 	free(res->ins);
 	res->ins = ret;
 	res->capacity = capacity;
 }
 
-void	res_pushfront(t_result *res, char *value)
+void	res_pushfront(t_result *res, t_ins value)
 {
 	int	i;
 
 	res->pushback(res, value);
 	i = res->size;
 	while (--i > 0)
-		ft_strswap(&res->ins[i], &res->ins[i - 1]);
+		ft_insswap(&res->ins[i], &res->ins[i - 1]);
 }
 
-void	res_pushback(t_result *res, char *value)
+void	res_pushback(t_result *res, t_ins value)
 {
 	if (res->size >= res->capacity)
 		realloc_ins(res, res->capacity * 2);
-	res->ins[res->size] = ft_strdup(value);
+	res->ins[res->size] = value;
 	res->size++;
 }
 
 void	res_popback(t_result *res)
 {
-	ft_strdel(&res->ins[--res->size]);
+	--res->size;
 }

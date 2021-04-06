@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/13 12:19:16 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:55:29 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 		if (check_order_stack(copy, STACK_A) == 0)
 		{
 			copy.pa(&copy);
-			s->algo[id]->pushback(s->algo[id], PA);
+			s->algo[id]->pushback(s->algo[id], Pa);
 			continue ;
 		}
 		if (begin == 0)
@@ -37,26 +37,27 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 		if (smallest_index == 0)
 		{
 			copy.pb(&copy);
-			s->algo[id]->pushback(s->algo[id], PB);
+			s->algo[id]->pushback(s->algo[id], Pb);
 			smallest = find_smallest_element(copy, STACK_A);
 		}
 		else if (copy.stack_a->_size == 3 && smallest_index == 1 && \
 		copy.stack_a->_data->value < copy.stack_a->_data->_next->_next->value)
 		{
 			copy.sa(&copy);
-			s->algo[id]->pushback(s->algo[id], SA);
+			s->algo[id]->pushback(s->algo[id], Sa);
 		}
 		else if (smallest_index <= ((int)copy.stack_a->_size / 2))
 		{
 			copy.ra(&copy);
-			s->algo[id]->pushback(s->algo[id], RA);
+			s->algo[id]->pushback(s->algo[id], Ra);
 		}
 		else
 		{
 			copy.rra(&copy);
-			s->algo[id]->pushback(s->algo[id], RRA);
+			s->algo[id]->pushback(s->algo[id], Rra);
 		}
 	}
-	change_by_pattern(s, id);
+	if (s->stack_a->_size <= 100)
+		change_by_pattern(s, id);
 	return (s->algo[id]->size);
 }

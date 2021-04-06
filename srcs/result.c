@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 11:43:12 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 14:28:32 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:53:29 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	res_remove(t_result *res, int index)
 	i = index;
 	while (i < res->size - 1)
 	{
-		ft_strswap(&res->ins[i], &res->ins[i + 1]);
+		ft_insswap(&res->ins[i], &res->ins[i + 1]);
 		i++;
 	}
 	res->popback(res);
@@ -41,7 +41,7 @@ void	first_in_last(t_result *res)
 
 	i = -1;
 	while (++i < res->size - 1)
-		ft_strswap(&res->ins[i], &res->ins[i + 1]);
+		ft_insswap(&res->ins[i], &res->ins[i + 1]);
 }
 
 void	last_in_front(t_result *res)
@@ -50,7 +50,7 @@ void	last_in_front(t_result *res)
 
 	i = res->size;
 	while (--i > 0)
-		ft_strswap(&res->ins[i], &res->ins[i - 1]);
+		ft_insswap(&res->ins[i], &res->ins[i - 1]);
 }
 
 t_result	*new_res(void)

@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:58:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/12 14:17:44 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:24:21 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 void	ft_intswap(int *a, int *b)
 {
 	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	ft_insswap(t_ins *a, t_ins *b)
+{
+	t_ins	tmp;
 
 	tmp = *a;
 	*a = *b;

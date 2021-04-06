@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/06 14:51:14 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 15:54:56 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 			if (element[Index] <= (int)cpy->stack_b->_size / 2)
 			{
 				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], RB);
+				s->algo[id]->pushback(s->algo[id], Rb);
 			}
 			else
 			{
 				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], RRB);
+				s->algo[id]->pushback(s->algo[id], Rrb);
 			}
 			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 		}
 		cpy->pb(cpy);
-		s->algo[id]->pushback(s->algo[id], PB);
+		s->algo[id]->pushback(s->algo[id], Pb);
 	}
 	else if (cpy->stack_a->_data && find_smallest_element(*cpy, STACK_B) > cpy->stack_a->_data->value)
 	{
@@ -82,19 +82,19 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 			if (element[Index] <= (int)cpy->stack_b->_size / 2)
 			{
 				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], RB);
+				s->algo[id]->pushback(s->algo[id], Rb);
 			}
 			else
 			{
 				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], RRB);
+				s->algo[id]->pushback(s->algo[id], Rrb);
 			}
 			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 		}
 		cpy->pb(cpy);
-		s->algo[id]->pushback(s->algo[id], PB);
+		s->algo[id]->pushback(s->algo[id], Pb);
 		cpy->rb(cpy);
-		s->algo[id]->pushback(s->algo[id], RB);
+		s->algo[id]->pushback(s->algo[id], Rb);
 	}
 	else
 	{
@@ -104,16 +104,16 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 			if (cpy->stack_a->_data->value < med_b)
 			{
 				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], RRB);
+				s->algo[id]->pushback(s->algo[id], Rrb);
 			}
 			else
 			{
 				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], RB);
+				s->algo[id]->pushback(s->algo[id], Rb);
 			}
 		}
 		cpy->pb(cpy);
-		s->algo[id]->pushback(s->algo[id], PB);
+		s->algo[id]->pushback(s->algo[id], Pb);
 	}
 	element[Value] = find_greatest_element(*cpy, STACK_B);
 	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
@@ -122,12 +122,12 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 		if (element[Index] <= (int)cpy->stack_b->_size / 2)
 		{
 			cpy->rb(cpy);
-			s->algo[id]->pushback(s->algo[id], RB);
+			s->algo[id]->pushback(s->algo[id], Rb);
 		}
 		else
 		{
 			cpy->rrb(cpy);
-			s->algo[id]->pushback(s->algo[id], RRB);
+			s->algo[id]->pushback(s->algo[id], Rrb);
 		}
 		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 	}
@@ -155,7 +155,7 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 			while (check_order_stack(*cpy, STACK_A) == 0)
 			{
 				cpy->pa(cpy);
-				s->algo[id]->pushback(s->algo[id], PA);
+				s->algo[id]->pushback(s->algo[id], Pa);
 				if (cpy->stack_b->_size == 0)
 					return ;
 			}
@@ -166,12 +166,12 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 	{
 		// dprintf(2, "BUG\n");
 		cpy->ra(cpy);
-		s->algo[id]->pushback(s->algo[id], RA);
+		s->algo[id]->pushback(s->algo[id], Ra);
 	}
 	else
 	{
 		cpy->rra(cpy);
-		s->algo[id]->pushback(s->algo[id], RRA);
+		s->algo[id]->pushback(s->algo[id], Rra);
 	}
 }
 
@@ -185,9 +185,11 @@ int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
 	t_node_stack	*tmp;
 
 	nb_chunk = ft_log(stack->stack_a->_size);	//
+	nb_chunk *= cpy.stack_a->_size >= 15 && cpy.stack_a->_size <= 100 ? 2 : 1;
+	nb_chunk *= cpy.stack_a->_size > 100 ? 2.5 : 1;
 	nb_element = cpy.stack_a->_size;			// TODO : Peut etre simplifié
 	range_per_chunk = nb_element / nb_chunk;	//
-	dprintf(2, "chunk = %d\telement = %zu\t range = %zu\n", nb_chunk, nb_element, range_per_chunk);
+	// dprintf(2, "chunk = %d\telement = %zu\t range = %zu\n", nb_chunk, nb_element, range_per_chunk);
 
 	s_copy = push_stack_copy(cpy);
 	s_copy = bubble_sort_stack(s_copy);
@@ -199,6 +201,7 @@ int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
 		// stack_state(cpy, st_max(cpy.stack_a->_size, cpy.stack_b->_size), 0);
 		merge_algo(&cpy, stack, range_per_chunk, id);
 	}
-	// change_by_pattern(stack, id);
+	if (nb_element <= 100)
+		change_by_pattern(stack, id);
 	return (stack->algo[id]->size);
 }
