@@ -31,7 +31,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 NAME = push_swap.a
 
-FLAG = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address
+FLAG = -Wall -Werror -Wextra -O3 -g3
 
 all: $(OBJ_PATH) Dependencies/$(NAME)
 	@make -C Srcs/Checker

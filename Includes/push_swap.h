@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/31 10:28:21 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 12:37:33 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,8 @@ t_push_stack	push_stack_copy(t_push_stack s);
 
 int				find_smallest_element(t_push_stack stack, int id_stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
+int				find_smallest_element_index_b(t_push_stack stack, int smallest);
+int				find_greatest_element(t_push_stack stack, int id_stack);
 t_push_stack	bubble_sort_stack(t_push_stack s);
 void			change_sort_value(t_push_stack *real_stack, t_push_stack copy);
 void			add_sort_value(t_push_stack *stack);
@@ -197,7 +199,7 @@ int				get_value(char **ptr);
 int				second_algo(t_push_stack stack, t_instruc *insn);
 int				first_algo(t_push_stack copy, t_push_stack *s, int id);
 int				quick_sort(t_push_stack s, int id);
-int				merge_sort(t_push_stack stack, int id);
+int				merge_sort(t_push_stack cpy, t_push_stack *s, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
 void			change_by_pattern(t_push_stack *s, int id);
 void			print_instruction(t_result *r);

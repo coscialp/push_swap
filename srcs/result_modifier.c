@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   result_modifier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:52:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/31 10:33:06 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 12:38:40 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

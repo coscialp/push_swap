@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_order.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:55:53 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/11 10:56:04 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 13:41:50 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	check_order_stack_a(t_push_stack s)
 	t_node_stack	*a;
 
 	a = s.stack_a->_data;
+	if (s.stack_a->_size <= 1)
+		return (0);
 	while (a->_next)
 	{
 		if (a->value > a->_next->value)
@@ -31,6 +33,8 @@ static bool	check_order_stack_b(t_push_stack s)
 	t_node_stack	*a;
 
 	a = s.stack_b->_data;
+	if (s.stack_b->_size <= 1)
+		return (0);
 	while (a->_next)
 	{
 		if (a->value < a->_next->value)

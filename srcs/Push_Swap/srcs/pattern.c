@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/03/13 12:15:36 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 14:19:22 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void	change_by_pattern(t_push_stack *s, int id)
 {
 	int					i;
 	size_t				j;
-	static t_pattern	pattern[7] = {
+	static t_pattern	pattern[9] = {
+		{2, 0, {PB, PA}, {}},
+		{2, 0, {PA, PB}, {}},
 		{2, 1, {SA, SB}, {SS}},
 		{2, 1, {SB, SA}, {SS}},
 		{2, 1, {RA, RB}, {RR}},
@@ -73,7 +75,7 @@ void	change_by_pattern(t_push_stack *s, int id)
 	};
 
 	i = -1;
-	while (++i < 7)
+	while (++i < 9)
 	{
 		j = -1;
 		while (++j < s->algo[id]->size - pattern[i].size + 1)
@@ -81,7 +83,8 @@ void	change_by_pattern(t_push_stack *s, int id)
 			if (!compare_pattern(pattern[i], s->algo[id], j))
 			{
 				delete_instruction(s, j, pattern[i].size, id);
-				insert_instruction(pattern[i], s->algo[id], j);
+				if (pattern[i].new_size != 0)
+					insert_instruction(pattern[i], s->algo[id], j);
 			}
 		}
 	}

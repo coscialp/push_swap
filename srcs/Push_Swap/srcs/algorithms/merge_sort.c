@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/05 11:45:02 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/06 14:51:14 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	get_hold_last(t_push_stack s, size_t range, size_t chunk)
 {
 	t_node_stack	*tmp;
 
+	if (!s.stack_a)
+		return (0);
 	tmp = s.stack_a->last(s.stack_a);
 	while (tmp)
 	{
@@ -47,34 +49,134 @@ typedef enum e_value_index
 	Index,
 }           t_val_idx;
 
-
-
-static void	merge_algo(t_push_stack s, size_t range, int id)
+static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 {
-	static size_t	chunk = 1;
-	int				hold_first[2];
-	int				hold_last[2];
+	int	element[2];
 
-	hold_first[Value] = get_hold_first(s, range, chunk);
-	hold_last[Value] = get_hold_last(s, range, chunk);
-	hold_first[Index] = find_smallest_element_index(s, hold_first[Value]);
-	hold_last[Index] = find_smallest_element_index(s, hold_last[Value]);
-	dprintf(2, "Hold first : %d\t Hold last : %d\n", hold_first[Value], hold_last[Value]);
-	dprintf(2, "Hold first i : %d\t Hold last i : %d\n", hold_first[Index], hold_last[Index]);
-	if (hold_first[Index] == 0 || hold_last[Index] == 0)
+	if (cpy->stack_a->_data && (element[Value] = find_greatest_element(*cpy, STACK_B)) < cpy->stack_a->_data->value)
 	{
-		
+		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+		while (element[Index] != 0)
+		{
+			if (element[Index] <= (int)cpy->stack_b->_size / 2)
+			{
+				cpy->rb(cpy);
+				s->algo[id]->pushback(s->algo[id], RB);
+			}
+			else
+			{
+				cpy->rrb(cpy);
+				s->algo[id]->pushback(s->algo[id], RRB);
+			}
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+		}
+		cpy->pb(cpy);
+		s->algo[id]->pushback(s->algo[id], PB);
 	}
-	if (hold_first[Index] <= (hold_last[Index] - s.stack_a->_size))
+	else if (cpy->stack_a->_data && find_smallest_element(*cpy, STACK_B) > cpy->stack_a->_data->value)
 	{
-		s.ra(&s);
-		s.algo[id]->pushback(s.algo[id], RA);
+		element[Value] = find_greatest_element(*cpy, STACK_B);
+		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+		while (element[Index] != 0)
+		{
+			if (element[Index] <= (int)cpy->stack_b->_size / 2)
+			{
+				cpy->rb(cpy);
+				s->algo[id]->pushback(s->algo[id], RB);
+			}
+			else
+			{
+				cpy->rrb(cpy);
+				s->algo[id]->pushback(s->algo[id], RRB);
+			}
+			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+		}
+		cpy->pb(cpy);
+		s->algo[id]->pushback(s->algo[id], PB);
+		cpy->rb(cpy);
+		s->algo[id]->pushback(s->algo[id], RB);
+	}
+	else
+	{
+		int med_b = find_median(cpy->stack_b);
+		while (cpy->stack_a->_data && cpy->stack_b->_size >= 2 && (cpy->stack_b->_data->value > cpy->stack_a->_data->value || cpy->stack_b->last(cpy->stack_b)->value < cpy->stack_a->_data->value))
+		{
+			if (cpy->stack_a->_data->value < med_b)
+			{
+				cpy->rrb(cpy);
+				s->algo[id]->pushback(s->algo[id], RRB);
+			}
+			else
+			{
+				cpy->rb(cpy);
+				s->algo[id]->pushback(s->algo[id], RB);
+			}
+		}
+		cpy->pb(cpy);
+		s->algo[id]->pushback(s->algo[id], PB);
+	}
+	element[Value] = find_greatest_element(*cpy, STACK_B);
+	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+	while (element[Index] != 0)
+	{
+		if (element[Index] <= (int)cpy->stack_b->_size / 2)
+		{
+			cpy->rb(cpy);
+			s->algo[id]->pushback(s->algo[id], RB);
+		}
+		else
+		{
+			cpy->rrb(cpy);
+			s->algo[id]->pushback(s->algo[id], RRB);
+		}
+		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 	}
 }
 
-int	merge_sort(t_push_stack stack, int id)
+static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 {
-	(void)id;
+	static size_t	chunk = 1;
+	static size_t	nb_pb = 0;
+	int				hold_first[2];
+	int				hold_last[2];
+
+	hold_first[Value] = get_hold_first(*cpy, range, chunk);
+	hold_last[Value] = get_hold_last(*cpy, range, chunk);
+	hold_first[Index] = find_smallest_element_index(*cpy, hold_first[Value]);
+	hold_last[Index] = find_smallest_element_index(*cpy, hold_last[Value]);
+	// dprintf(2, "HF[%d] = %d\nHL[%d] = %d\n", hold_first[Index], hold_first[Value], hold_last[Index], hold_last[Value]);
+	if (hold_first[Index] == 0 || hold_last[Index] == 0)
+	{
+		nb_pb++;
+		if (nb_pb >= range)
+		{
+			chunk++;
+			nb_pb = 0;
+			while (check_order_stack(*cpy, STACK_A) == 0)
+			{
+				cpy->pa(cpy);
+				s->algo[id]->pushback(s->algo[id], PA);
+				if (cpy->stack_b->_size == 0)
+					return ;
+			}
+		}
+		sort_stack_b(cpy, s, id);
+	}
+	else if (hold_first[Index] <= ((int)cpy->stack_a->_size) - hold_last[Index])
+	{
+		// dprintf(2, "BUG\n");
+		cpy->ra(cpy);
+		s->algo[id]->pushback(s->algo[id], RA);
+	}
+	else
+	{
+		cpy->rra(cpy);
+		s->algo[id]->pushback(s->algo[id], RRA);
+	}
+}
+
+int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
+{
 	int				nb_chunk;			//
 	size_t			nb_element;			// Modifiable
 	size_t			range_per_chunk;	//
@@ -82,20 +184,21 @@ int	merge_sort(t_push_stack stack, int id)
 	t_push_stack	s_copy;
 	t_node_stack	*tmp;
 
-	nb_chunk = 2;//ft_log(stack.stack_a->_size);	//
-	nb_element = stack.stack_a->_size;			// TODO : Peut etre simplifié
+	nb_chunk = ft_log(stack->stack_a->_size);	//
+	nb_element = cpy.stack_a->_size;			// TODO : Peut etre simplifié
 	range_per_chunk = nb_element / nb_chunk;	//
 	dprintf(2, "chunk = %d\telement = %zu\t range = %zu\n", nb_chunk, nb_element, range_per_chunk);
 
-	s_copy = push_stack_copy(stack);
+	s_copy = push_stack_copy(cpy);
 	s_copy = bubble_sort_stack(s_copy);
 	add_sort_value(&s_copy);
-	change_sort_value(&stack, s_copy);
-	tmp = stack.stack_a->_data;
-	while (check_stack(stack, PUSH_SWAP))
+	change_sort_value(&cpy, s_copy);
+	tmp = cpy.stack_a->_data;
+	while (check_stack(cpy, PUSH_SWAP))
 	{
-		merge_algo(stack, range_per_chunk, id);
-		break; 
+		// stack_state(cpy, st_max(cpy.stack_a->_size, cpy.stack_b->_size), 0);
+		merge_algo(&cpy, stack, range_per_chunk, id);
 	}
-	return (0);
+	// change_by_pattern(stack, id);
+	return (stack->algo[id]->size);
 }
