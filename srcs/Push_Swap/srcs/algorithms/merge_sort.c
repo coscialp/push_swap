@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/06 18:42:24 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 14:20:53 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 			find_position(*(cpy->stack_b), cpy->stack_a->_data->value, &before[Value], &after[Value]);
 			before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
 			after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
+			// dprintf(2, "HERE\n");
 			while ((cpy->stack_b->_data->value > cpy->stack_a->_data->value || cpy->stack_b->last(cpy->stack_b)->value < cpy->stack_a->_data->value))
 			{
 				if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
@@ -159,8 +160,11 @@ static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 			s->algo[id]->pushback(s->algo[id], Pb);
 		}
 	}
+	// dprintf(2, "5\n");
 	element[Value] = find_greatest_element(*cpy, STACK_B);
+	// dprintf(2, "6\n");
 	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
+	// dprintf(2, "7\n");
 	if (check_order_stack(*cpy, STACK_A) == 0)
 	{
 		while (element[Index] != 0)
@@ -211,7 +215,6 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 	}
 	else if (hold_first[Index] <= ((int)cpy->stack_a->_size) - hold_last[Index])
 	{
-		// dprintf(2, "BUG\n");
 		cpy->ra(cpy);
 		s->algo[id]->pushback(s->algo[id], Ra);
 		int	element[2];
@@ -259,6 +262,7 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 			if (cpy->stack_b->_size >= 2)
 			{
 				find_position(*(cpy->stack_b), hold_first[Value], &before[Value], &after[Value]);
+				// dprintf(2, "%d:before[%d] = %d\n%d:after[%d] = %d\n", hold_first[Value], before[Index], before[Value], hold_first[Value], after[Index], after[Value]);
 				before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
 				after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
 				if ((cpy->stack_b->_data->value > hold_first[Value] || cpy->stack_b->last(cpy->stack_b)->value < hold_first[Value]))
@@ -274,8 +278,6 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 						s->algo[id]->pushback(s->algo[id], Rrb);
 					}
 				}
-				cpy->pb(cpy);
-				s->algo[id]->pushback(s->algo[id], Pb);
 			}
 		}
 	}
@@ -321,7 +323,7 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
 			}
 		}
-		/*else
+		else
 		{
 			int before[2];
 			int after[2];
@@ -343,10 +345,8 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 						s->algo[id]->pushback(s->algo[id], Rrb);
 					}
 				}
-				cpy->pb(cpy);
-				s->algo[id]->pushback(s->algo[id], Pb);
 			}
-		}*/
+		}
 	}
 }
 
@@ -376,7 +376,7 @@ int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
 		// stack_state(cpy, st_max(cpy.stack_a->_size, cpy.stack_b->_size), 0);
 		merge_algo(&cpy, stack, range_per_chunk, id);
 	}
-	if (nb_element <= 100)
+	//if (nb_element <= 100)
 		change_by_pattern(stack, id);
 	return (stack->algo[id]->size);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 17:13:37 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 14:23:05 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,31 +85,40 @@ void	change_by_pattern(t_push_stack *s, int id)
 {
 	int					i;
 	size_t				j;
-	static t_pattern	pattern[10] = {
+	static t_pattern	pattern[14] = {
 		{3, 2, {Ra, Pb, Rra}, {Sa, Pb}},
 		{3, 2, {Pb, Ra, Pa}, {Sa, Ra}},
 		{2, 1, {Sa, Sb}, {Ss}},
 		{2, 1, {Sb, Sa}, {Ss}},
+		{2, 0, {Ra, Rra}, {}},
+		{2, 0, {Rb, Rrb}, {}},
+		{2, 0, {Rra, Ra}, {}},
+		{2, 0, {Rrb, Rb}, {}},
 		{2, 1, {Ra, Rb}, {Rr}},
 		{2, 1, {Rb, Ra}, {Rr}},
 		{2, 1, {Rra, Rrb}, {Rrr}},
 		{2, 1, {Rrb, Rra}, {Rrr}},
-		{2, 0, {Pb, Pa}, {Ra}},
-		{2, 0, {Pa, Pb}, {Pb}}
+		{2, 0, {Pb, Pa}, {}},
+		{2, 0, {Pa, Pb}, {}}
 	};
 
-	i = -1;
-	while (++i < 10)
+	j = 0;
+	while (j + 3 < s->algo[id]->size)
 	{
-		j = -1;
-		while (++j + pattern[i].size < s->algo[id]->size + 1)
+		i = 0;
+		while (i < 14)
 		{
 			if (!compare_pattern(pattern[i], s->algo[id], j))
 			{
 				delete_instruction(s, j, pattern[i].size, id);
 				if (pattern[i].new_size != 0)
 					insert_instruction(pattern[i], s->algo[id], j);
+				j -= !!j;
+				j -= !!j;
+				break ;
 			}
+			++i;
 		}
+		++j;
 	}
 }
