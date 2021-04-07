@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/06 15:55:29 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/07 16:04:49 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 			s->algo[id]->pushback(s->algo[id], Rra);
 		}
 	}
-	if (s->stack_a->_size <= 100)
-		change_by_pattern(s, id);
+	change_by_pattern(s, id);
 	return (s->algo[id]->size);
 }
