@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 15:35:17 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/08 11:02:27 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef enum e_ins
 	Rrb = 0x727262,
 	Rrr = 0x727272
 }			t_ins;
+
+typedef enum e_value_index
+{
+	Value,
+	Index,
+}			t_val_idx;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -182,6 +188,8 @@ int				find_smallest_element(t_push_stack stack, int id_stack);
 int				find_smallest_element_index(t_push_stack stack, int smallest);
 int				find_smallest_element_index_b(t_push_stack stack, int smallest);
 int				find_greatest_element(t_push_stack stack, int id_stack);
+int				get_hold_first(t_push_stack s, size_t range, size_t chunk);
+int				get_hold_last(t_push_stack s, size_t range, size_t chunk);
 t_push_stack	bubble_sort_stack(t_push_stack s);
 void			change_sort_value(t_push_stack *real_stack, t_push_stack copy);
 void			add_sort_value(t_push_stack *stack);
@@ -198,8 +206,8 @@ int				get_value(char **ptr);
 
 int				second_algo(t_push_stack stack, t_instruc *insn);
 int				first_algo(t_push_stack copy, t_push_stack *s, int id);
-int				quick_sort(t_push_stack s, int id);
 int				merge_sort(t_push_stack cpy, t_push_stack *s, int id);
+void			find_position(t_stack s, int value, int *first, int *second);
 bool			check_order_stack(t_push_stack s, int id_stack);
 void			change_by_pattern(t_push_stack *s, int id);
 void			print_instruction(t_result *r);

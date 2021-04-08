@@ -24,7 +24,7 @@ SRC_PATH = srcs/
 
 SRCS = $(addprefix $(SRC_PATH), $(SRCS_NAME))
 
-FLAG = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address#-fsanitize=undefined
+FLAG = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
 
 OBJ_NAME = ${SRCS_NAME:.c=.o}
 

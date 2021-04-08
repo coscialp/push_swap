@@ -18,13 +18,13 @@ HEADER_DEPENDENCIES =  ../../Dependencies/libft/includes/
 
 DEPENDENCIES = ../../Dependencies/libft/libft.a ../../Dependencies/push_swap.a
 
-SRCS_NAME = main.c algorithms/first_algo.c algorithms/merge_sort.c algorithms/quick_sort.c pattern.c
+SRCS_NAME = main.c algorithms/first_algo.c algorithms/merge_sort/merge_sort.c algorithms/merge_sort/find_position.c pattern.c
 
 SRC_PATH = srcs/
 
 SRCS = $(addprefix $(SRC_PATH), $(SRCS_NAME))
 
-FLAG = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address#-fsanitize=undefined
+FLAG = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
 
 OBJ_NAME = ${SRCS_NAME:.c=.o}
 
@@ -43,6 +43,7 @@ $(NAME): $(OBJ) $(HEADER) $(HEADER_DEPENDENCIES)
 $(OBJ_PATH):
 	@mkdir -p bin/ 2> /dev/null
 	@mkdir -p bin/algorithms 2> /dev/null
+	@mkdir -p bin/algorithms/merge_sort 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"
