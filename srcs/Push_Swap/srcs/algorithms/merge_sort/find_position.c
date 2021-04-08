@@ -1,13 +1,11 @@
 #include "push_swap.h"
 
-void	find_position(t_stack s, int value, int *first, int *second)
+static void	cpy_and_swap(t_stack s, int *stack, int value)
 {
-	t_node_stack	*tmp;
-	int				*stack;
 	size_t			i;
+	t_node_stack	*tmp;
 
 	i = -1;
-	stack = ft_xmalloc(sizeof(int) * (s._size + 1));
 	tmp = s._data;
 	while (++i < s._size)
 	{
@@ -25,6 +23,15 @@ void	find_position(t_stack s, int value, int *first, int *second)
 			i -= !!i;
 		}
 	}
+}
+
+void	find_position(t_stack s, int value, int *first, int *second)
+{
+	int				*stack;
+	size_t			i;
+
+	stack = ft_xmalloc(sizeof(int) * (s._size + 1));
+	cpy_and_swap(s, stack, value);
 	i = -1;
 	while (++i < s._size)
 	{
