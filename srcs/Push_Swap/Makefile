@@ -18,7 +18,8 @@ HEADER_DEPENDENCIES =  ../../Dependencies/libft/includes/
 
 DEPENDENCIES = ../../Dependencies/libft/libft.a ../../Dependencies/push_swap.a
 
-SRCS_NAME = main.c algorithms/first_algo.c algorithms/merge_sort/merge_sort.c algorithms/merge_sort/find_position.c pattern.c
+SRCS_NAME = main.c algorithms/first_algo.c algorithms/merge_sort/merge_sort.c algorithms/merge_sort/find_position.c \
+			algorithms/merge_sort/push_b_algo.c pattern.c
 
 SRC_PATH = srcs/
 

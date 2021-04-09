@@ -6,7 +6,7 @@
 /*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/08 11:01:58 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 10:38:04 by akerdeka         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,93 +15,60 @@
 
 static void	sort_stack_b(t_push_stack *cpy, t_push_stack *s, int id)
 {
-	int	element[2];
-
-	if (cpy->stack_a->_data && (element[Value] = find_greatest_element(*cpy, STACK_B)) < cpy->stack_a->_data->value)
+	if (cpy->stack_a->_data && \
+	find_greatest_element(*cpy, STACK_B) < cpy->stack_a->_data->value)
 	{
-		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-		while (element[Index] != 0)
-		{
-			if (element[Index] < (int)cpy->stack_b->_size / 2)
-			{
-				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rb);
-			}
-			else
-			{
-				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rrb);
-			}
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-		}
+		no_greatest(cpy, s, id);
 		cpy->pb(cpy);
 		s->algo[id]->pushback(s->algo[id], Pb);
 	}
-	else if (cpy->stack_a->_data && find_smallest_element(*cpy, STACK_B) > cpy->stack_a->_data->value)
+	else if (cpy->stack_a->_data && \
+	find_smallest_element(*cpy, STACK_B) > cpy->stack_a->_data->value)
 	{
-		element[Value] = find_greatest_element(*cpy, STACK_B);
-		element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-		while (element[Index] != 0)
-		{
-			if (element[Index] <= (int)cpy->stack_b->_size / 2)
-			{
-				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rb);
-			}
-			else
-			{
-				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rrb);
-			}
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-		}
+		no_greatest(cpy, s, id);
 		cpy->pb(cpy);
 		s->algo[id]->pushback(s->algo[id], Pb);
+	}
+	else if (cpy->stack_a->_data && cpy->stack_b->_size >= 2)
+		ins_sort_b(cpy, s, cpy->stack_a->_data->value, id);
+	if (check_order_stack(*cpy, STACK_A) == 0)
+		no_greatest(cpy, s, id);
+}
+
+static void	push_a_at_end(t_push_stack *cpy, t_push_stack *s, int id)
+{
+	while (check_order_stack(*cpy, STACK_A) == 0)
+	{
+		cpy->pa(cpy);
+		s->algo[id]->pushback(s->algo[id], Pa);
+		if (cpy->stack_b->_size == 0)
+			return ;
+	}
+}
+
+static void	ra_or_rra(t_push_stack *cp, t_push_stack *s, int id, int hold[2][2])
+{
+	if (hold[first][Index] <= ((int)cp->stack_a->_size) - hold[last][Index])
+	{
+		cp->ra(cp);
+		s->algo[id]->pushback(s->algo[id], Ra);
+		if (find_greatest_element(*cp, STACK_B) < hold[first][Value])
+			no_greatest(cp, s, id);
+		else if (find_smallest_element(*cp, STACK_B) > hold[first][Value])
+			no_greatest(cp, s, id);
+		else
+			insert_in_b(cp, s, hold[first][Value], id);
 	}
 	else
 	{
-		int before[2];
-		int after[2];
-		if (cpy->stack_a->_data && cpy->stack_b->_size >= 2)
-		{
-			find_position(*(cpy->stack_b), cpy->stack_a->_data->value, &before[Value], &after[Value]);
-			before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
-			after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
-			while ((cpy->stack_b->_data->value > cpy->stack_a->_data->value || cpy->stack_b->last(cpy->stack_b)->value < cpy->stack_a->_data->value))
-			{
-				if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
-				{
-					cpy->rb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rb);
-				}
-				else
-				{
-					cpy->rrb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rrb);
-				}
-			}
-			cpy->pb(cpy);
-			s->algo[id]->pushback(s->algo[id], Pb);
-		}
-	}
-	element[Value] = find_greatest_element(*cpy, STACK_B);
-	element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-	if (check_order_stack(*cpy, STACK_A) == 0)
-	{
-		while (element[Index] != 0)
-		{
-			if (element[Index] <= (int)cpy->stack_b->_size / 2)
-			{
-				cpy->rb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rb);
-			}
-			else
-			{
-				cpy->rrb(cpy);
-				s->algo[id]->pushback(s->algo[id], Rrb);
-			}
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-		}
+		cp->rra(cp);
+		s->algo[id]->pushback(s->algo[id], Rra);
+		if (find_greatest_element(*cp, STACK_B) < hold[last][Value])
+			no_greatest(cp, s, id);
+		else if (find_smallest_element(*cp, STACK_B) > hold[last][Value])
+			no_greatest(cp, s, id);
+		else
+			insert_in_b(cp, s, hold[last][Value], id);
 	}
 }
 
@@ -109,167 +76,27 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 {
 	static size_t	chunk = 1;
 	static size_t	nb_pb = 0;
-	int				hold_first[2];
-	int				hold_last[2];
+	int				hold[2][2];
 
-	hold_first[Value] = get_hold_first(*cpy, range, chunk);
-	hold_last[Value] = get_hold_last(*cpy, range, chunk);
-	hold_first[Index] = find_smallest_element_index(*cpy, hold_first[Value]);
-	hold_last[Index] = find_smallest_element_index(*cpy, hold_last[Value]);
-	if (hold_first[Index] == 0 || hold_last[Index] == 0)
+	hold[first][Value] = get_hold_first(*cpy, range, chunk);
+	hold[last][Value] = get_hold_last(*cpy, range, chunk);
+	hold[first][Index] = find_smallest_element_index(*cpy, hold[first][Value]);
+	hold[last][Index] = find_smallest_element_index(*cpy, hold[last][Value]);
+	if (hold[first][Index] == 0 || hold[last][Index] == 0)
 	{
-		nb_pb++;
-		if (nb_pb >= range)
+		if (++nb_pb >= range && ft_memset(&nb_pb, 0, sizeof(int)))
 		{
 			chunk++;
-			nb_pb = 0;
 			if (cpy->stack_a->_size == 0)
 			{
-				while (check_order_stack(*cpy, STACK_A) == 0)
-				{
-					cpy->pa(cpy);
-					s->algo[id]->pushback(s->algo[id], Pa);
-					if (cpy->stack_b->_size == 0)
-						return ;
-				}
+				push_a_at_end(cpy, s, id);
+				return ;
 			}
 		}
 		sort_stack_b(cpy, s, id);
 	}
-	else if (hold_first[Index] <= ((int)cpy->stack_a->_size) - hold_last[Index])
-	{
-		cpy->ra(cpy);
-		s->algo[id]->pushback(s->algo[id], Ra);
-		int	element[2];
-		if ((element[Value] = find_greatest_element(*cpy, STACK_B)) < hold_first[Value])
-		{
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			if (element[Index] != 0)
-			{
-				if (element[Index] <= (int)cpy->stack_b->_size / 2)
-				{
-					cpy->rb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rb);
-				}
-				else
-				{
-					cpy->rrb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rrb);
-				}
-				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			}
-		}
-		else if (find_smallest_element(*cpy, STACK_B) > hold_first[Value])
-		{
-			element[Value] = find_greatest_element(*cpy, STACK_B);
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			if (element[Index] != 0)
-			{
-				if (element[Index] <= (int)cpy->stack_b->_size / 2)
-				{
-					cpy->rb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rb);
-				}
-				else
-				{
-					cpy->rrb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rrb);
-				}
-				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			}
-		}
-		else
-		{
-			int before[2];
-			int after[2];
-			if (cpy->stack_b->_size >= 2)
-			{
-				find_position(*(cpy->stack_b), hold_first[Value], &before[Value], &after[Value]);
-				before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
-				after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
-				if ((cpy->stack_b->_data->value > hold_first[Value] || cpy->stack_b->last(cpy->stack_b)->value < hold_first[Value]))
-				{
-					if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
-					{
-						cpy->rb(cpy);
-						s->algo[id]->pushback(s->algo[id], Rb);
-					}
-					else
-					{
-						cpy->rrb(cpy);
-						s->algo[id]->pushback(s->algo[id], Rrb);
-					}
-				}
-			}
-		}
-	}
 	else
-	{
-		cpy->rra(cpy);
-		s->algo[id]->pushback(s->algo[id], Rra);
-		int	element[2];
-		if ((element[Value] = find_greatest_element(*cpy, STACK_B)) < hold_last[Value])
-		{
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			if (element[Index] != 0)
-			{
-				if (element[Index] <= (int)cpy->stack_b->_size / 2)
-				{
-					cpy->rb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rb);
-				}
-				else
-				{
-					cpy->rrb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rrb);
-				}
-				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			}
-		}
-		else if (find_smallest_element(*cpy, STACK_B) > hold_last[Value])
-		{
-			element[Value] = find_greatest_element(*cpy, STACK_B);
-			element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			if (element[Index] != 0)
-			{
-				if (element[Index] <= (int)cpy->stack_b->_size / 2)
-				{
-					cpy->rb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rb);
-				}
-				else
-				{
-					cpy->rrb(cpy);
-					s->algo[id]->pushback(s->algo[id], Rrb);
-				}
-				element[Index] = find_smallest_element_index_b(*cpy, element[Value]);
-			}
-		}
-		else
-		{
-			int before[2];
-			int after[2];
-			if (cpy->stack_b->_size >= 2)
-			{
-				find_position(*(cpy->stack_b), hold_last[Value], &before[Value], &after[Value]);
-				before[Index] = find_smallest_element_index_b(*cpy, before[Value]);
-				after[Index] = find_smallest_element_index_b(*cpy, after[Value]);
-				if ((cpy->stack_b->_data->value > hold_last[Value] || cpy->stack_b->last(cpy->stack_b)->value < hold_last[Value]))
-				{
-					if (before[Index] <= ((int)cpy->stack_b->_size) - after[Index])
-					{
-						cpy->rb(cpy);
-						s->algo[id]->pushback(s->algo[id], Rb);
-					}
-					else
-					{
-						cpy->rrb(cpy);
-						s->algo[id]->pushback(s->algo[id], Rrb);
-					}
-				}
-			}
-		}
-	}
+		ra_or_rra(cpy, s, id, hold);
 }
 
 int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
