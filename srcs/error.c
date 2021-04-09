@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 11:11:06 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 11:14:13 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ void	log_error(int error)
 		ft_dprintf(2, "\033[31;01mError:\tOnly numbers are accepted!\033[00m\n");
 	else if (error == NOTINS)
 		ft_dprintf(2, "\033[31;01mError:\tNot instruction!\033[00m\n");
+	else if (error == NOARG)
+		ft_dprintf(2, "\033[31;01mError:\tNumber of arguments invalid!\033[00m\n");
 	exit(1);
 }

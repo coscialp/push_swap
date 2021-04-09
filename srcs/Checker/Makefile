@@ -28,20 +28,21 @@ FLAG = -Wall -Werror -Wextra -O3 -g3 #-fsanitize=address#-fsanitize=undefined
 
 OBJ_NAME = ${SRCS_NAME:.c=.o}
 
-OBJ_PATH = bin/
+OBJ_PATH = ../../bin/checker/
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 NAME = checker
 
-all: libft $(OBJ_PATH) $(NAME)
+all: libft $(OBJ_PATH) $(HEADER) $(NAME)
 
 $(NAME): $(OBJ) $(HEADER) $(HEADER_DEPENDENCIES)
 	@gcc $(FLAG) $(OBJ) -o $(NAME) -I ${HEADER} -I ${HEADER_DEPENDENCIES} ${DEPENDENCIES} 
 	@printf "	\033[2K\r\033[1;38;5;110mChecker\t\t: \033[0;38;5;121mUpdated\n\033[0m"
 
 $(OBJ_PATH):
-	@mkdir -p bin/ 2> /dev/null
+	@mkdir -p ../../bin/ 2> /dev/null
+	@mkdir -p ../../bin/checker/ 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEADER) $(HEADER_DEPENDENCIES) Makefile
 	@printf "\33[2K\r$(ORANGE)Compiling...	\033[37m$<\033[36m \033[0m"

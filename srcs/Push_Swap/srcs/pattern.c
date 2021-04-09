@@ -6,12 +6,11 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 13:45:19 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/08 13:43:54 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 11:08:58 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
 static void	delete_instruction(t_push_stack *s, int index, int each, int algo)
 {

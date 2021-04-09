@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/08 13:38:16 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 11:13:34 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define DUNUM 0x000001
 # define NONUM 0x000002
 # define NOTINS 0x000003
+# define NOARG 0x000004
 
 # define CHECKER 0x000010
 # define PUSH_SWAP 0x000011
@@ -73,6 +74,12 @@ typedef enum e_value_index
 	Value,
 	Index,
 }			t_val_idx;
+
+typedef enum e_first_last
+{
+	first,
+	last,
+}			t_fst_lst;
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -208,6 +215,9 @@ int				second_algo(t_push_stack stack, t_instruc *insn);
 int				first_algo(t_push_stack copy, t_push_stack *s, int id);
 int				merge_sort(t_push_stack cpy, t_push_stack *s, int id);
 void			find_position(t_stack s, int value, int *first, int *second);
+void			no_greatest(t_push_stack *cpy, t_push_stack *s, int id);
+void			insert_in_b(t_push_stack *cp, t_push_stack *s, int val, int id);
+void			ins_sort_b(t_push_stack *cp, t_push_stack *s, int val, int id);
 bool			check_order_stack(t_push_stack s, int id_stack);
 void			change_by_pattern(t_push_stack *s, int id);
 void			print_instruction(t_result *r, size_t i);

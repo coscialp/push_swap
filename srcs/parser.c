@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:49:50 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/08 14:58:56 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 11:25:37 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parser(t_push_stack *s, t_instruc *insn, char **arg)
 			break ;
 		if (!ft_strcmp(tok, ""))
 			continue ;
-		if (ft_stris(ft_ternary(tok[0] == '-', tok + 1,  tok), ft_isdigit))
+		if (ft_stris(ft_ternary(tok[0] == '-', tok + 1, tok), ft_isdigit))
 		{
 			if (s->stack_b->push(s->stack_b, ft_atoi(tok)) == -1 || \
 			no_duplicate_number(s->stack_a, ft_atoi(tok)))
