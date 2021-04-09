@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_median.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:58:58 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/06 15:24:21 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:45:12 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	find_median(t_stack *s)
 		{
 			ft_intswap(&stack[i], &stack[i + 1]);
 			i = -1;
-			continue ;
 		}
 	}
 	median = stack[s->_size / 2];
+	free(stack);
 	return (median);
 }

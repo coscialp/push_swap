@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:24:52 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/03/13 16:11:24 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:17:41 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_push_stack	push_stack_copy(t_push_stack s)
 	t_push_stack	copy;
 
 	copy = new_push_stack();
+	free(copy.stack_a);
 	copy.stack_a = stack_copy(s.stack_a);
-	copy.stack_b = new_stack();
 	return (copy);
 }
 

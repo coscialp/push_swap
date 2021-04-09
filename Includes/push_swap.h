@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 11:13:34 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:47:53 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,5 +238,6 @@ void			res_pushfront(t_result *res, t_ins value);
 void			realloc_ins(t_result *res, size_t capacity);
 void			first_in_last(t_result *res);
 void			last_in_front(t_result *res);
+void			ft_free_stack(t_push_stack *stack);
 
 #endif

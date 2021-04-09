@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 08:55:48 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/08 13:49:54 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:48:48 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	first_algo(t_push_stack copy, t_push_stack *s, int id)
 		second_part(copy, s, id, smallest);
 	}
 	change_by_pattern(s, id);
+	ft_free_stack(&copy);
 	return (s->algo[id]->size);
 }

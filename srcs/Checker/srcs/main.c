@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 11:28:15 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:48:15 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int ac, char **av)
 			log_error(NOARG);
 		checker(stack, insn, stop, 0);
 	}
+	ft_free_stack(&stack);
 	log_error(NOARG);
 	return (0);
 }

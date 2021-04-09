@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:51:54 by akerdeka          #+#    #+#             */
-/*   Updated: 2021/04/09 10:38:04 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/09 14:48:37 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,24 @@ static void	merge_algo(t_push_stack *cpy, t_push_stack *s, size_t range, int id)
 		ra_or_rra(cpy, s, id, hold);
 }
 
-int	merge_sort(t_push_stack cpy, t_push_stack *stack, int id)
+int	merge_sort(t_push_stack copy, t_push_stack *stack, int id)
 {
 	int				nb_chunk;
 	size_t			nb_element;
 	size_t			range_per_chunk;
 	t_push_stack	s_copy;
 
-	nb_element = cpy.stack_a->_size;
+	nb_element = copy.stack_a->_size;
 	nb_chunk = ft_sqrt(nb_element);
 	range_per_chunk = nb_element / nb_chunk;
-	s_copy = push_stack_copy(cpy);
+	s_copy = push_stack_copy(copy);
 	s_copy = bubble_sort_stack(s_copy);
 	add_sort_value(&s_copy);
-	change_sort_value(&cpy, s_copy);
-	while (check_stack(cpy, PUSH_SWAP))
-		merge_algo(&cpy, stack, range_per_chunk, id);
+	change_sort_value(&copy, s_copy);
+	while (check_stack(copy, PUSH_SWAP))
+		merge_algo(&copy, stack, range_per_chunk, id);
 	change_by_pattern(stack, id);
+	ft_free_stack(&copy);
+	ft_free_stack(&s_copy);
 	return (stack->algo[id]->size);
 }
