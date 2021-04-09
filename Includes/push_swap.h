@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/08 11:02:27 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/08 13:38:16 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ int				merge_sort(t_push_stack cpy, t_push_stack *s, int id);
 void			find_position(t_stack s, int value, int *first, int *second);
 bool			check_order_stack(t_push_stack s, int id_stack);
 void			change_by_pattern(t_push_stack *s, int id);
-void			print_instruction(t_result *r);
+void			print_instruction(t_result *r, size_t i);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

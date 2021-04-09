@@ -3,15 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akerdeka <akerdeka@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/07 16:24:55 by akerdeka         ###   ########lyon.fr   */
+/*   Updated: 2021/04/08 13:44:00 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
+
+void	print_instruction(t_result *r, size_t i)
+{
+	while (++i < r->size)
+	{
+		if (r->ins[i] == Pa)
+			ft_dprintf(STDOUT, "pa\n");
+		else if (r->ins[i] == Pb)
+			ft_dprintf(STDOUT, "pb\n");
+		else if (r->ins[i] == Sa)
+			ft_dprintf(STDOUT, "sa\n");
+		else if (r->ins[i] == Sb)
+			ft_dprintf(STDOUT, "sb\n");
+		else if (r->ins[i] == Ss)
+			ft_dprintf(STDOUT, "ss\n");
+		else if (r->ins[i] == Ra)
+			ft_dprintf(STDOUT, "ra\n");
+		else if (r->ins[i] == Rb)
+			ft_dprintf(STDOUT, "rb\n");
+		else if (r->ins[i] == Rra)
+			ft_dprintf(STDOUT, "rra\n");
+		else if (r->ins[i] == Rrb)
+			ft_dprintf(STDOUT, "rrb\n");
+		else if (r->ins[i] == Rr)
+			ft_dprintf(STDOUT, "rr\n");
+		else if (r->ins[i] == Rrr)
+			ft_dprintf(STDOUT, "rrr\n");
+	}
+}
 
 static void	push_swap(t_push_stack s)
 {
@@ -36,7 +65,7 @@ static void	push_swap(t_push_stack s)
 		}
 		i++;
 	}
-	print_instruction(s.algo[best_algo]);
+	print_instruction(s.algo[best_algo], -1);
 }
 
 int	main(int ac, char **av)
