@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:06:26 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 14:47:53 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 11:21:56 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define NONUM 0x000002
 # define NOTINS 0x000003
 # define NOARG 0x000004
+# define OVFLOW 0x000005
 
 # define CHECKER 0x000010
 # define PUSH_SWAP 0x000011

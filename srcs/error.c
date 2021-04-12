@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 09:01:20 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 11:14:13 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 11:22:32 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	log_error(int error)
 		ft_dprintf(2, "\033[31;01mError:\tNot instruction!\033[00m\n");
 	else if (error == NOARG)
 		ft_dprintf(2, "\033[31;01mError:\tNumber of arguments invalid!\033[00m\n");
+	else if (error == OVFLOW)
+		ft_dprintf(2, "\033[31;01mError:\tNumber not an integer!\033[00m\n");
 	exit(1);
 }
