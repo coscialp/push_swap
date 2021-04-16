@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 14:48:02 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 15:37:37 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	main(int ac, char **av)
 		while (ac-- > stop)
 			parser(&stack, insn, &av[ac]);
 		if (stack.stack_a->_size == 0 && stack.stack_b->_size == 0)
-			log_error(NOARG);
+			log_error(NOARG, &stack);
 		push_swap(stack);
+		ft_free_stack(&stack);
 	}
-	ft_free_stack(&stack);
 	return (0);
 }

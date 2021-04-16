@@ -159,7 +159,7 @@ typedef struct s_pattern
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void			log_error(int error);
+void			log_error(int error, t_push_stack *s);
 void			stack_state(t_push_stack s, size_t max, size_t i);
 bool			check_stack(t_push_stack s, int program);
 bool			no_duplicate_number(t_stack *a, int value);

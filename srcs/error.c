@@ -55,7 +55,7 @@ bool	no_duplicate_number(t_stack *a, int value)
 	return (0);
 }
 
-void	log_error(int error)
+void	log_error(int error, t_push_stack *s)
 {
 	if (error == DUNUM)
 		ft_dprintf(2, "\033[31;01mError:\tNo duplicates numbers!\033[00m\n");
@@ -67,5 +67,6 @@ void	log_error(int error)
 		ft_dprintf(2, "\033[31;01mError:\tNumber of arguments invalid!\033[00m\n");
 	else if (error == OVFLOW)
 		ft_dprintf(2, "\033[31;01mError:\tNumber not an integer!\033[00m\n");
+	ft_free_stack(s);
 	exit(1);
 }

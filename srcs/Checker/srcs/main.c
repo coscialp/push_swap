@@ -6,7 +6,7 @@
 /*   By: coscialp <coscialp@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:13:05 by coscialp          #+#    #+#             */
-/*   Updated: 2021/04/09 14:48:15 by coscialp         ###   ########lyon.fr   */
+/*   Updated: 2021/04/12 15:37:46 by coscialp         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	checker(t_push_stack s, t_instruc *insn, int stop, short i)
 			}
 		}
 		if (i == 11)
-			log_error(NOTINS);
+			log_error(NOTINS, &s);
 		ft_strdel(&line);
 	}
 	check_stack(s, CHECKER);
@@ -68,10 +68,10 @@ int	main(int ac, char **av)
 		while (ac-- > stop)
 			parser(&stack, insn, &av[ac]);
 		if (stack.stack_a->_size == 0 && stack.stack_b->_size == 0)
-			log_error(NOARG);
+			log_error(NOARG, &stack);
 		checker(stack, insn, stop, 0);
+		ft_free_stack(&stack);
 	}
-	ft_free_stack(&stack);
-	log_error(NOARG);
+	log_error(NOARG, &stack);
 	return (0);
 }

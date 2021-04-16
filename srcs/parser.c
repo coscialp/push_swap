@@ -63,13 +63,13 @@ void	parser(t_push_stack *s, t_instruc *insn, char **arg)
 			{
 				if (s->stack_b->push(s->stack_b, (int)ft_atol(tok)) == -1 || \
 				no_duplicate_number(s->stack_a, (int)ft_atol(tok)))
-					log_error(DUNUM);
+					log_error(DUNUM, s);
 			}
 			else
-				log_error(OVFLOW);
+				log_error(OVFLOW, s);
 		}
 		else
-			log_error(NONUM);
+			log_error(NONUM, s);
 	}
 	while (s->stack_b->_size)
 		insn[3].func(s);
