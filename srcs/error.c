@@ -67,6 +67,7 @@ void	log_error(int error, t_push_stack *s)
 		ft_dprintf(2, "\033[31;01mError:\tNumber of arguments invalid!\033[00m\n");
 	else if (error == OVFLOW)
 		ft_dprintf(2, "\033[31;01mError:\tNumber not an integer!\033[00m\n");
-	ft_free_stack(s);
+	if (error != NOARG)
+		ft_free_stack(s);
 	exit(1);
 }

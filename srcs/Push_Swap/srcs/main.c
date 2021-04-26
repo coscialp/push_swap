@@ -90,5 +90,7 @@ int	main(int ac, char **av)
 		push_swap(stack);
 		ft_free_stack(&stack);
 	}
+	else
+		log_error(NOARG, &stack);
 	return (0);
 }
